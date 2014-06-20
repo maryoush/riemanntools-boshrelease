@@ -1,0 +1,37 @@
+#!/bin/bash
+
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+RUN_DIR=/var/vcap/sys/run/riemann-mongodb
+LOG_DIR=/var/vcap/sys/log/riemann-mongodb
+JOB_DIR=/var/vcap/jobs/riemann-mongodb
+PIDFILE=${RUN_DIR}/mongodb_serverstatus_pid
+
+case $1 in
+
+  start)
+    mkdir -p $RUN_DIR $LOG_DIR
+    chown -R vcap:vcap $RUN_DIR $LOG_DIR
+
+    cd /var/vcap/packages/riemann-mongodb/riemann-mongodb
+
+    export PATH=/var/vcap/packages/ruby/bin:$PATH
+
+    bundle exec riemann-mongodb-serverstatus --host <%= properties.riemann.server %> --event-host <%= spec.index %>.<%= spec.job.name %>.<%= properties.riemann.suffix %> \
+        1>> $LOG_DIR/riemann-mongodb-serverstatus.stdout.log \
+        2>> $LOG_DIR/riemann-mongodb-serverstatus.stderr.log &
+
+    echo $! > $PIDFILE
+    ;;
+
+  stop)
+
+    kill -9 `cat $PIDFILE`
+    rm -f $PIDFILE
+    ;;
+
+  *)
+    echo "Usage: ctl-mongodb-serverstatus {start|stop}" ;;
+
+esac

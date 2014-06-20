@@ -1,0 +1,9 @@
+---
+name: riemann-tools
+
+dependencies:
+  - ruby
+
+files:
+  - riemann-tools/Gemfile
+  - riemann-tools/Gemfile.lock

@@ -1,0 +1,18 @@
+---
+name: riemann-mongodb
+
+packages:
+  - ruby
+  - riemann-mongodb
+
+templates:
+  ctl-mongodb.erb: bin/ctl-mongodb
+  ctl-mongodb-rs-status.erb: bin/ctl-mongodb-rs-status
+  ctl-mongodb-serverstatus.erb: bin/ctl-mongodb-serverstatus
+
+properties:
+  riemann.server:
+    description: "IP of the riemann server."
+  riemann.suffix:
+    description: "Suffix for the riemann host"
+    default: riemann

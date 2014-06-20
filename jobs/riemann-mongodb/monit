@@ -1,0 +1,17 @@
+check process riemann-mongodb
+  with pidfile /var/vcap/sys/run/riemann-mongodb/mongodb_server_pid
+  start program "/var/vcap/jobs/riemann-mongodb/bin/ctl-mongodb start"
+  stop program "/var/vcap/jobs/riemann-mongodb/bin/ctl-mongodb stop"
+  group vcap
+
+check process riemann-mongodb-serverstatus
+  with pidfile /var/vcap/sys/run/riemann-mongodb/mongodb_serverstatus_pid
+  start program "/var/vcap/jobs/riemann-mongodb/bin/ctl-mongodb-serverstatus start"
+  stop program "/var/vcap/jobs/riemann-mongodb/bin/ctl-mongodb-serverstatus stop"
+  group vcap
+
+check process riemann-mongodb-rs-status
+  with pidfile /var/vcap/sys/run/riemann-mongodb/mongodb_rs_status_pid
+  start program "/var/vcap/jobs/riemann-mongodb/bin/ctl-mongodb-rs-status start"
+  stop program "/var/vcap/jobs/riemann-mongodb/bin/ctl-mongodb-rs-status stop"
+  group vcap

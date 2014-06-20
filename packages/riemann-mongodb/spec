@@ -1,0 +1,9 @@
+---
+name: riemann-mongodb
+
+dependencies:
+  - ruby
+
+files:
+  - riemann-mongodb/Gemfile
+  - riemann-mongodb/Gemfile.lock
