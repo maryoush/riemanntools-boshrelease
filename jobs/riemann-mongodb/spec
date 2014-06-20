@@ -15,4 +15,4 @@ properties:
     description: "IP of the riemann server."
   riemann.suffix:
     description: "Suffix for the riemann host"
-    default: riemann
+    default: bosh
