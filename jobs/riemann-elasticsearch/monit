@@ -1,0 +1,5 @@
+check process riemann-elasticsearch
+  with pidfile /var/vcap/sys/run/riemann-elasticsearch/elasticsearch_pid
+  start program "/var/vcap/jobs/riemann-elasticsearch/bin/ctl-elasticsearch start"
+  stop program "/var/vcap/jobs/riemann-elasticsearch/bin/ctl-elasticsearch stop"
+  group vcap
