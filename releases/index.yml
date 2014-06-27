@@ -2,3 +2,5 @@
 builds:
   ce5a18e4de8343756adfd1e01b8949e36657e0b0:
     version: '1'
+  e5b5b019efef1ff5c810f553d3ba3890b27cd11a:
+    version: '2'
