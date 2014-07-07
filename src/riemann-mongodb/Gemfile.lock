@@ -1,12 +1,20 @@
+PATH
+  remote: .
+  specs:
+    riemann-mongodb (0.3.0)
+      bson_ext (>= 1.10.0)
+      mongo (>= 1.10.0)
+      riemann-tools (>= 0.2.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
     beefcake (0.5.0)
-    bson (1.10.1)
-    bson_ext (1.10.1)
-      bson (~> 1.10.1)
+    bson (1.10.2)
+    bson_ext (1.10.2)
+      bson (~> 1.10.2)
     builder (3.2.2)
-    excon (0.36.0)
+    excon (0.37.0)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     fog (1.22.1)
@@ -15,9 +23,10 @@ GEM
       fog-json
       ipaddress (~> 0.5)
       nokogiri (~> 1.5, >= 1.5.11)
-    fog-brightbox (0.0.2)
-      fog-core
+    fog-brightbox (0.1.1)
+      fog-core (~> 1.22)
       fog-json
+      inflecto
     fog-core (1.22.0)
       builder
       excon (~> 0.33)
@@ -28,11 +37,12 @@ GEM
     fog-json (1.0.0)
       multi_json (~> 1.0)
     formatador (0.2.5)
+    inflecto (0.0.2)
     ipaddress (0.8.0)
     mime-types (2.3)
     mini_portile (0.6.0)
-    mongo (1.10.1)
-      bson (~> 1.10.1)
+    mongo (1.10.2)
+      bson (= 1.10.2)
     mtrc (0.0.4)
     multi_json (1.10.1)
     multipart-post (2.0.0)
@@ -42,21 +52,15 @@ GEM
     net-ssh (2.9.1)
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
-    redis (3.1.0)
     riemann-client (0.2.3)
       beefcake (>= 0.3.5)
       mtrc (>= 0.0.4)
       trollop (>= 1.16.2)
-    riemann-mongodb (0.3.0)
-      bson_ext (>= 1.10.0)
-      mongo (>= 1.10.0)
-      riemann-tools (>= 0.2.1)
-    riemann-tools (0.2.1)
+    riemann-tools (0.2.2)
       faraday (>= 0.8.5)
       fog (>= 1.4.0)
       munin-ruby (>= 0.2.1)
       nokogiri (>= 1.5.6)
-      redis (>= 3.0.2)
       riemann-client (>= 0.2.2)
       trollop (>= 1.16.2)
       yajl-ruby (>= 1.1.0)
@@ -67,4 +71,4 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  riemann-mongodb
+  riemann-mongodb!

@@ -1,0 +1,62 @@
+#!/usr/bin/env ruby
+
+# Gathers MongoDB replSetGetStatus command output (rs.status() from the shell) and submits them to Riemann.
+
+require 'riemann/tools'
+
+class Riemann::Tools::Mongo
+  include Riemann::Tools
+  require 'mongo'
+
+  opt :host_prefix, "Prefix for event_host", :default => ''
+  opt :mongo_host, "Mongo hostname", :default => 'localhost'
+  opt :mongo_port, "Mongo port", :default => 27017
+  opt :mongo_db, "Mongo database", :default => 'admin'
+  opt :mongo_rs_members, "Mongo ReplSet Members (all|self)", :default => 'all'
+
+  def initialize
+    @db = ::Mongo::MongoClient.new(opts[:mongo_host], opts[:mongo_port]).db(opts[:mongo_db])
+    @cmd = {"replSetGetStatus"=>1}
+  end
+
+  def tick
+    begin
+      response = @db.command(@cmd)
+    rescue => e
+      report(
+        :host    => opts[:host_prefix] + opts[:mongo_host].dup,
+        :service => "mongodb health",
+        :description => "Connection error: #{e.class} - #{e.message}"
+      )
+    end
+
+    return if response.nil?
+
+    report(
+      :host    => opts[:host_prefix] + opts[:mongo_host].dup,
+      :service => "mongodb health",
+      :state   => "ok",
+      :description => "mongodb connection status ok"
+    )
+
+    response["members"].each do |member|
+      if opts[:mongo_rs_members] == "all" or member.has_key?("self")
+        member.each do |property, value|
+          if !value.is_a? Fixnum
+            next
+          end
+          report(
+            :host    => opts[:host_prefix] + opts[:mongo_host].dup,
+            :service => "mongodb rs #{property}",
+            :metric  => value.to_f,
+            :state   => "ok",
+            :tags    => ["mongodb"]
+          )
+        end
+      end
+    end
+  end
+
+end
+
+Riemann::Tools::Mongo.run

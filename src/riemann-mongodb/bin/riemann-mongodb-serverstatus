@@ -1,0 +1,64 @@
+#!/usr/bin/env ruby
+
+# Runs serverStatus command, or db.serverStatus() from the shell and send metrics to riemann.
+
+require 'riemann/tools'
+
+class Riemann::Tools::Mongo
+  include Riemann::Tools
+  require 'mongo'
+
+  opt :mongo_host, "Mongo hostname", :default => 'localhost'
+  opt :mongo_port, "Mongo port", :default => 27017
+  opt :mongo_db, "Mongo database", :default => 'local'
+
+  def initialize
+  	@db = ::Mongo::MongoClient.new(opts[:mongo_host], opts[:mongo_port]).db(opts[:mongo_db])
+  	@cmd = {"serverStatus"=>1}
+    @path = []
+    @all_values = {}
+  end
+
+  def get_all_values_nested(nested_hash={})
+    nested_hash.each_pair do |k,v|
+      @path << k
+      case v
+        when Hash then get_all_values_nested(v)
+        else
+          if v.is_a? Fixnum
+            @all_values.merge!({"mongodb server #{@path.join(" ")}" => "#{v}"})
+          end
+          @path.pop
+      end
+    end
+    @path.pop
+    return @all_values
+  end
+
+  def tick
+    begin
+      response = @db.command(@cmd)
+    rescue => e
+      report(
+        :host    => opts[:mongo_host],
+        :service => "mongodb health",
+        :description => "Connection error: #{e.class} - #{e.message}"
+      )
+    end
+
+    return if response.nil?
+
+    metrics = get_all_values_nested(response)
+    metrics.each do |metric, value|
+      report(
+        :host    => opts[:mongo_host],
+        :service => metric,
+        :metric  => value.to_f,
+        :state   => "ok",
+        :tags    => ["mongodb"]
+      )
+    end
+  end
+end
+
+Riemann::Tools::Mongo.run

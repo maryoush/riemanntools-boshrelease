@@ -1,8 +1,10 @@
+<% if_p("riemann.mongodb.db") do %>
 check process riemann-mongodb
   with pidfile /var/vcap/sys/run/riemann-mongodb/mongodb_server_pid
   start program "/var/vcap/jobs/riemann-mongodb/bin/ctl-mongodb start"
   stop program "/var/vcap/jobs/riemann-mongodb/bin/ctl-mongodb stop"
   group vcap
+<% end %>
 
 check process riemann-mongodb-serverstatus
   with pidfile /var/vcap/sys/run/riemann-mongodb/mongodb_serverstatus_pid
