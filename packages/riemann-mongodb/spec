@@ -5,5 +5,4 @@ dependencies:
   - ruby
 
 files:
-  - riemann-mongodb/Gemfile
-  - riemann-mongodb/Gemfile.lock
+  - riemann-mongodb/**/*

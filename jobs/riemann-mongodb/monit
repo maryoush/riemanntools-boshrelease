@@ -12,8 +12,10 @@ check process riemann-mongodb-serverstatus
   stop program "/var/vcap/jobs/riemann-mongodb/bin/ctl-mongodb-serverstatus stop"
   group vcap
 
+<% if_p("mongodb.replSet.name") do %>
 check process riemann-mongodb-rs-status
   with pidfile /var/vcap/sys/run/riemann-mongodb/mongodb_rs_status_pid
   start program "/var/vcap/jobs/riemann-mongodb/bin/ctl-mongodb-rs-status start"
   stop program "/var/vcap/jobs/riemann-mongodb/bin/ctl-mongodb-rs-status stop"
   group vcap
+<% end %>

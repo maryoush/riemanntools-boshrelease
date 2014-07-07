@@ -16,5 +16,5 @@ properties:
   riemann.suffix:
     description: "Suffix for the riemann host"
     default: bosh
-  riemann.mongodb.db
+  riemann.mongodb.db:
     description: "Mongodb database to monitor"
