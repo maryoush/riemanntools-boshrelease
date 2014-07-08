@@ -42,13 +42,10 @@ class Riemann::Tools::Mongo
     response["members"].each do |member|
       if opts[:mongo_rs_members] == "all" or member.has_key?("self")
         member.each do |property, value|
-          if !value.is_a? Fixnum
-            next
-          end
           report(
             :host    => opts[:host_prefix] + opts[:mongo_host].dup,
             :service => "mongodb rs #{property}",
-            :metric  => value.to_f,
+            :metric  => value.to_s,
             :state   => "ok",
             :tags    => ["mongodb"]
           )

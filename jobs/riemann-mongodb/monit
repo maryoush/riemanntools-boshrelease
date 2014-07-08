@@ -1,3 +1,4 @@
+## TODO: make this an array of databases to monitor and loop to it.
 <% if_p("riemann.mongodb.db") do %>
 check process riemann-mongodb
   with pidfile /var/vcap/sys/run/riemann-mongodb/mongodb_server_pid

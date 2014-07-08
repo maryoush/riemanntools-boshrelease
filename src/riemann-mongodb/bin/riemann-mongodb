@@ -19,15 +19,13 @@ class Riemann::Tools::Mongo
   def tick
     begin
       @db.stats.each do |property, value|
-        data = {
+        report(
           :host    => opts[:mongo_host].dup,
           :service => "mongodb #{property}",
           :metric  => value.to_s,
-          :state   => value.to_s,
+          :state   => "ok",
           :tags    => ['mongodb']
-        }
-
-        report(data)
+        )
       end
     end
 

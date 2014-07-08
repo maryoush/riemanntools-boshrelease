@@ -25,9 +25,7 @@ class Riemann::Tools::Mongo
       case v
         when Hash then get_all_values_nested(v)
         else
-          if v.is_a? Fixnum
-            @all_values.merge!({"mongodb server #{@path.join(" ")}" => "#{v}"})
-          end
+          @all_values.merge!({"mongodb server #{@path.join(" ")}" => "#{v}"})
           @path.pop
       end
     end
@@ -53,7 +51,7 @@ class Riemann::Tools::Mongo
       report(
         :host    => opts[:mongo_host],
         :service => metric,
-        :metric  => value.to_f,
+        :metric  => value.to_s,
         :state   => "ok",
         :tags    => ["mongodb"]
       )
