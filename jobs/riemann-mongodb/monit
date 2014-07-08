@@ -3,6 +3,7 @@ check process riemann-mongodb-serverstatus
   start program "/var/vcap/jobs/riemann-mongodb/bin/ctl-mongodb-serverstatus start"
   stop program "/var/vcap/jobs/riemann-mongodb/bin/ctl-mongodb-serverstatus stop"
   group vcap
+  depends on mongodb
 
 <% if_p("riemann.mongodb.db") do %>
 check process riemann-mongodb
@@ -10,6 +11,7 @@ check process riemann-mongodb
   start program "/var/vcap/jobs/riemann-mongodb/bin/ctl-mongodb start"
   stop program "/var/vcap/jobs/riemann-mongodb/bin/ctl-mongodb stop"
   group vcap
+  depends on mongodb
 <% end %>
 
 <% if_p("mongodb.replSet.name") do %>
@@ -18,4 +20,5 @@ check process riemann-mongodb-rs-status
   start program "/var/vcap/jobs/riemann-mongodb/bin/ctl-mongodb-rs-status start"
   stop program "/var/vcap/jobs/riemann-mongodb/bin/ctl-mongodb-rs-status stop"
   group vcap
+  depends on mongodb
 <% end %>
