@@ -25,7 +25,7 @@ class Riemann::Tools::Mongo
       @path << k
       case v
         when Hash then get_all_values_nested(v)
-        when Array then get_all_values_nested(Hash[v.map.with_index {|x,i| [i, x] }])
+        when Array then get_all_values_nested(Hash[v.map.with_index {|x,i| [i,x]}])
         else
           @all_values.merge!({"mongodb rs #{@path.join(" ")}" => "#{v}"})
           @path.pop
