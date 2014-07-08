@@ -19,7 +19,7 @@ case $1 in
     export PATH=/var/vcap/packages/ruby/bin:$PATH
 
     bundle exec riemann-mongodb-serverstatus --host <%= properties.riemann.server %> --event-host <%= spec.index %>.<%= spec.job.name %>.<%= properties.riemann.suffix %> \
-        1>> $LOG_DIR/riemann-mongodb-serverstatus.stdout.log \
+        >> $LOG_DIR/riemann-mongodb-serverstatus.stdout.log \
         2>> $LOG_DIR/riemann-mongodb-serverstatus.stderr.log &
 
     echo $! > $PIDFILE

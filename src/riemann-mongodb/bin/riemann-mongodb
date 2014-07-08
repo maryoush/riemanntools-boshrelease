@@ -28,9 +28,7 @@ class Riemann::Tools::Mongo
         )
       end
     end
-
   end
-
 end
 
 Riemann::Tools::Mongo.run

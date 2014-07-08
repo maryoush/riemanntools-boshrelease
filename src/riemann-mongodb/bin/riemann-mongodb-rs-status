@@ -12,11 +12,26 @@ class Riemann::Tools::Mongo
   opt :mongo_host, "Mongo hostname", :default => 'localhost'
   opt :mongo_port, "Mongo port", :default => 27017
   opt :mongo_db, "Mongo database", :default => 'admin'
-  opt :mongo_rs_members, "Mongo ReplSet Members (all|self)", :default => 'all'
 
   def initialize
     @db = ::Mongo::MongoClient.new(opts[:mongo_host], opts[:mongo_port]).db(opts[:mongo_db])
     @cmd = {"replSetGetStatus"=>1}
+    @path = []
+    @all_values = {}
+  end
+
+  def get_all_values_nested(nested_hash={})
+    nested_hash.each_pair do |k,v|
+      @path << k
+      case v
+        when Hash then get_all_values_nested(v)
+        else
+          @all_values.merge!({"mongodb rs #{@path.join(" ")}" => "#{v}"})
+          @path.pop
+      end
+    end
+    @path.pop
+    return @all_values
   end
 
   def tick
@@ -39,21 +54,17 @@ class Riemann::Tools::Mongo
       :description => "mongodb connection status ok"
     )
 
-    response["members"].each do |member|
-      if opts[:mongo_rs_members] == "all" or member.has_key?("self")
-        member.each do |property, value|
-          report(
-            :host    => opts[:host_prefix] + opts[:mongo_host].dup,
-            :service => "mongodb rs #{property}",
-            :metric  => value.to_s,
-            :state   => "ok",
-            :tags    => ["mongodb"]
-          )
-        end
-      end
+    metrics = get_all_values_nested(response)
+    metrics.each do |metric, value|
+      report(
+        :host    => opts[:host_prefix] + opts[:mongo_host].dup,
+        :service => metric,
+        :metric  => value.to_s,
+        :state   => "ok",
+        :tags    => ["mongodb"]
+      )
     end
   end
-
 end
 
 Riemann::Tools::Mongo.run

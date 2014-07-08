@@ -1,4 +1,9 @@
-## TODO: make this an array of databases to monitor and loop to it.
+check process riemann-mongodb-serverstatus
+  with pidfile /var/vcap/sys/run/riemann-mongodb/mongodb_serverstatus_pid
+  start program "/var/vcap/jobs/riemann-mongodb/bin/ctl-mongodb-serverstatus start"
+  stop program "/var/vcap/jobs/riemann-mongodb/bin/ctl-mongodb-serverstatus stop"
+  group vcap
+
 <% if_p("riemann.mongodb.db") do %>
 check process riemann-mongodb
   with pidfile /var/vcap/sys/run/riemann-mongodb/mongodb_server_pid
@@ -6,12 +11,6 @@ check process riemann-mongodb
   stop program "/var/vcap/jobs/riemann-mongodb/bin/ctl-mongodb stop"
   group vcap
 <% end %>
-
-check process riemann-mongodb-serverstatus
-  with pidfile /var/vcap/sys/run/riemann-mongodb/mongodb_serverstatus_pid
-  start program "/var/vcap/jobs/riemann-mongodb/bin/ctl-mongodb-serverstatus start"
-  stop program "/var/vcap/jobs/riemann-mongodb/bin/ctl-mongodb-serverstatus stop"
-  group vcap
 
 <% if_p("mongodb.replSet.name") do %>
 check process riemann-mongodb-rs-status

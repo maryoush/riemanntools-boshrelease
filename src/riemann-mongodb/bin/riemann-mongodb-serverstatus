@@ -38,7 +38,7 @@ class Riemann::Tools::Mongo
       response = @db.command(@cmd)
     rescue => e
       report(
-        :host    => opts[:mongo_host],
+        :host    => opts[:mongo_host].dup,
         :service => "mongodb health",
         :description => "Connection error: #{e.class} - #{e.message}"
       )
@@ -46,10 +46,17 @@ class Riemann::Tools::Mongo
 
     return if response.nil?
 
+    report(
+      :host    => opts[:mongo_host].dup,
+      :service => "mongodb health",
+      :state   => "ok",
+      :description => "mongodb connection status ok"
+    )
+
     metrics = get_all_values_nested(response)
     metrics.each do |metric, value|
       report(
-        :host    => opts[:mongo_host],
+        :host    => opts[:mongo_host].dup,
         :service => metric,
         :metric  => value.to_s,
         :state   => "ok",
