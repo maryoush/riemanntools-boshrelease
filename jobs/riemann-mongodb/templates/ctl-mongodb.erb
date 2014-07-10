@@ -18,7 +18,11 @@ case $1 in
 
     export PATH=/var/vcap/packages/ruby/bin:$PATH
 
-    bundle exec riemann-mongodb --host <%= properties.riemann.server %> --event-host <%= spec.index %>.<%= spec.job.name %>.<%= properties.riemann.suffix %> --mongo-db <%= properties.riemann.mongodb.db %> \
+    bundle exec riemann-mongodb \
+        --host <%= properties.riemann.server %> \
+        --event-host <%= spec.index %>.<%= spec.job.name %>.<%= properties.riemann.suffix %> \
+        --mongo-db <%= properties.riemann.mongodb.db %> \
+        --tag mongodb \
         >> $LOG_DIR/riemann-mongodb.stdout.log \
         2>> $LOG_DIR/riemann-mongodb.stderr.log &
 

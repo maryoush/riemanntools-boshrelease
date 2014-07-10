@@ -27,7 +27,14 @@ class Riemann::Tools::Mongo
         when Hash then get_all_values_nested(v)
         when Array then get_all_values_nested(Hash[v.map.with_index {|x,i| [i,x]}])
         else
-          @all_values.merge!({"mongodb rs #{@path.join(" ")}" => "#{v}"})
+          if v.is_a? TrueClass
+            v = 1
+          elsif v.is_a? FalseClass
+            v = 0
+          end
+          if (v.is_a? Numeric)
+            @all_values.merge!({"mongodb rs #{@path.join(" ")}" => v.to_f})
+          end
           @path.pop
       end
     end
@@ -42,6 +49,8 @@ class Riemann::Tools::Mongo
       report(
         :host    => opts[:host_prefix] + opts[:mongo_host].dup,
         :service => "mongodb health",
+        :state   => "critical",
+        :tags    => ["mongodb"],
         :description => "Connection error: #{e.class} - #{e.message}"
       )
     end
@@ -52,17 +61,20 @@ class Riemann::Tools::Mongo
       :host    => opts[:host_prefix] + opts[:mongo_host].dup,
       :service => "mongodb health",
       :state   => "ok",
+      :tags    => ["mongodb"],
       :description => "mongodb connection status ok"
     )
+
 
     metrics = get_all_values_nested(response)
     metrics.each do |metric, value|
       report(
-        :host    => opts[:host_prefix] + opts[:mongo_host].dup,
-        :service => metric,
-        :metric  => value.to_s,
-        :state   => "ok",
-        :tags    => ["mongodb"]
+        :host        => opts[:host_prefix] + opts[:mongo_host].dup,
+        :service     => metric,
+        :metric      => value.to_f,
+        :state       => "ok",
+        :tags        => ["mongodb"],
+        :description => ""
       )
     end
   end

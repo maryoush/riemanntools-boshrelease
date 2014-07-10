@@ -19,13 +19,21 @@ class Riemann::Tools::Mongo
   def tick
     begin
       @db.stats.each do |property, value|
-        report(
-          :host    => opts[:mongo_host].dup,
-          :service => "mongodb #{property}",
-          :metric  => value.to_s,
-          :state   => "ok",
-          :tags    => ['mongodb']
-        )
+        if value.is_a? TrueClass
+          value = 1
+        elsif value.is_a? FalseClass
+          value = 0
+        end
+        if (value.is_a? Numeric)
+          report(
+            :host        => opts[:mongo_host].dup,
+            :service     => "mongodb #{property}",
+            :metric      => value.to_f,
+            :state       => "ok",
+            :tags        => ["mongodb"],
+            :description => ""
+          )
+        end
       end
     end
   end
