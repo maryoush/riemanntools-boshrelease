@@ -1,0 +1,40 @@
+---
+packages:
+- name: riemann-tools
+  version: 0dd2ee25ab4288b7c0938ea82e9bf529596004ef
+  sha1: 9e041cc687acbd0798b1e8d9b03944a7d92ef781
+  fingerprint: 0dd2ee25ab4288b7c0938ea82e9bf529596004ef
+  dependencies:
+  - ruby
+- name: riemann-mongodb
+  version: 00d0ed7d5831b40d0a597f0a4d1da97b9ae5a878
+  sha1: a5193bb3d1609c5a746536d100b5e653c807b31c
+  fingerprint: 00d0ed7d5831b40d0a597f0a4d1da97b9ae5a878
+  dependencies:
+  - ruby
+- name: ruby
+  version: 572a9d3589a74e044b195ad0778f7d66117bf98c
+  sha1: a465ac5f6beb6f052f7e2598807754522c16eef1
+  fingerprint: 572a9d3589a74e044b195ad0778f7d66117bf98c
+  dependencies: []
+jobs:
+- name: riemann-zookeeper
+  version: a2698be5bb568d4429652e9bf27464c946496f2b
+  fingerprint: a2698be5bb568d4429652e9bf27464c946496f2b
+  sha1: ea0f0a1023509ab39267bdb12394ff2b3774ef48
+- name: riemann-elasticsearch
+  version: c60529928bdc63b673cd11aefab84ff1b5c0d414
+  fingerprint: c60529928bdc63b673cd11aefab84ff1b5c0d414
+  sha1: 4e113dee09f37a5209925d8d7e658ebd0e38789e
+- name: riemann-tools
+  version: 6764427d98095af61830d76ca3068a026555a32d
+  fingerprint: 6764427d98095af61830d76ca3068a026555a32d
+  sha1: 5af7d3b1ed8d951dc5cd503a0bc0c4eede9b7e70
+- name: riemann-mongodb
+  version: c2b8f95bd3e85b24d353f4a4adef657163f618e0
+  fingerprint: c2b8f95bd3e85b24d353f4a4adef657163f618e0
+  sha1: 9477309d60736caf687879fe7ffaf93df609d800
+commit_hash: f7b23a72
+uncommitted_changes: true
+name: riemann-tools-hybris
+version: '5.2'
