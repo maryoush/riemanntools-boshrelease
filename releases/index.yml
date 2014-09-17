@@ -4,7 +4,8 @@ builds:
     version: '1'
   e5b5b019efef1ff5c810f553d3ba3890b27cd11a:
     version: '2'
-  !binary "NzAxODYzNjIzM2JkZjI2N2VmYjgwMmM3YmExNzczNWI4NzQxYzk3MA==":
+  7018636233bdf267efb802c7ba17735b8741c970:
     version: '3'
-  !binary "MzU5Njk0MTM4NmIxYjY5YzNhNjcyYTBhNGIzYjVjZDdkODg3M2EwZA==":
+  3596941386b1b69c3a672a0a4b3b5cd7d8873a0d:
     version: '4'
+format-version: '2'
