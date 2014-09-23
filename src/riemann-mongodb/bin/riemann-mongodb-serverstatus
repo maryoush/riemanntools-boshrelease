@@ -30,6 +30,8 @@ class Riemann::Tools::Mongo
             v = 1
           elsif v.is_a? FalseClass
             v = 0
+          elsif (v.is_a? String and v.tr('"\'','') =~ /^[-+]?[0-9]*\.?[0-9]+$/) # match number between quotes
+            v = v.tr('"\'','').to_f
           end
           if (v.is_a? Numeric)
             @all_values.merge!({"mongodb server #{@path.join(" ")}" => v.to_f})
@@ -75,6 +77,39 @@ class Riemann::Tools::Mongo
         :description => ""
       )
     end
+
+    # lock_percentage => (lockTime / totalTime) * 100
+    lockPercentage = ((metrics['mongodb server globalLock lockTime'].to_f / metrics['mongodb server globalLock totalTime'].to_f) * 100)
+    if !lockPercentage.is_a? Numeric
+      lockPercentage=0
+    end
+    report(
+      :host    => opts[:mongo_host].dup,
+      :service => "mongodb server globalLock lockPercentage",
+      :metric  => lockPercentage.to_f,
+      :state   => "ok",
+      :tags    => ["mongodb"],
+      :description => ""
+    )
+
+
+    # Non Mapped Virtual Memory => (virtual / mapped) or mappedWithJournal?
+    if metrics.has_key?("mongodb server mem mappedWithJournal")
+      nonMappedVirtualMemory = (metrics['mongodb server mem virtual'].to_f / metrics['mongodb server mem mappedWithJournal'].to_f)
+    else
+      nonMappedVirtualMemory = (metrics['mongodb server mem virtual'].to_f / metrics['mongodb server mem mapped'].to_f)
+    end
+    if !nonMappedVirtualMemory.is_a? Numeric
+      nonMappedVirtualMemory=0
+    end
+    report(
+      :host    => opts[:mongo_host].dup,
+      :service => "mongodb server mem nonMappedVirtualMemory",
+      :metric  => nonMappedVirtualMemory.to_f,
+      :state   => "ok",
+      :tags    => ["mongodb"],
+      :description => ""
+    )
   end
 end
 

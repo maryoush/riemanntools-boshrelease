@@ -31,6 +31,8 @@ class Riemann::Tools::Mongo
             v = 1
           elsif v.is_a? FalseClass
             v = 0
+          elsif (v.is_a? String and v.tr('"\'','') =~ /^[-+]?[0-9]*\.?[0-9]+$/) # match number between quotes
+            v = v.tr('"\'','').to_f
           end
           if (v.is_a? Numeric)
             @all_values.merge!({"mongodb rs #{@path.join(" ")}" => v.to_f})
