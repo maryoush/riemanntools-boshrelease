@@ -68,14 +68,18 @@ class Riemann::Tools::Mongo
 
     metrics = get_all_values_nested(response)
     metrics.each do |metric, value|
-      report(
-        :host        => opts[:mongo_host].dup,
-        :service     => metric,
-        :metric      => value.to_f,
-        :state       => "ok",
-        :tags        => ["mongodb"],
-        :description => ""
-      )
+      if  (metric !~ /mongodb server (recordStats|locks) .+/) ||
+          (metric =~ /mongodb server locks (\.|admin|local)/) ||
+          (metric =~ /mongodb server recordStats (admin|local|accessesNotInMemory|pageFaultExceptionsThrown)/)
+        report(
+          :host        => opts[:mongo_host].dup,
+          :service     => metric,
+          :metric      => value.to_f,
+          :state       => "ok",
+          :tags        => ["mongodb"],
+          :description => ""
+        )
+      end
     end
 
     # lock_percentage => (lockTime / totalTime) * 100
