@@ -4,25 +4,22 @@ builds:
     blobstore_id: 40a7bfa3-9102-4039-b9b3-ce909882b434
     version: 6c6310e779d0322cea7e0ed7c54c8bd604a74d11
     sha1: 62b30f423c1f4481f95d099d35bb4ae0c1f4938f
-  !binary "MzAwNDljMWI2Y2Y0YjYyMzQxYWExOGQ2MWZlOTU4N2NiZmRiNGUzZg==":
-    version: !binary |-
-      MzAwNDljMWI2Y2Y0YjYyMzQxYWExOGQ2MWZlOTU4N2NiZmRiNGUzZg==
-    sha1: !binary |-
-      MGE5MjBmMDllY2EzMjQ5OWQ2NThjNGQzNGNiZGFlMmQzNDI1ZmYxMw==
-  !binary "YmQ4YmFhZTJhOGRiNWZkNGMxODI5ZDgyNDlkODI1NzI3Njk4NzNiMw==":
+  30049c1b6cf4b62341aa18d61fe9587cbfdb4e3f:
+    version: 30049c1b6cf4b62341aa18d61fe9587cbfdb4e3f
+    sha1: 0a920f09eca32499d658c4d34cbdae2d3425ff13
+  bd8baae2a8db5fd4c1829d8249d82572769873b3:
     blobstore_id: c893f441-bed0-4882-b7ee-de72ac58a4af
-    version: !binary |-
-      YmQ4YmFhZTJhOGRiNWZkNGMxODI5ZDgyNDlkODI1NzI3Njk4NzNiMw==
-    sha1: !binary |-
-      OTlhM2Y1ZjFjMzQyOWQyYmQyMWVhOGMzYTVmN2UxYzUxZWRkNWM1NA==
-  !binary "MDg1ZjYzMzg1ZjVmNTc0OGU1YTMwNmYwODRlYzJkYWU5YjgzMDM2NQ==":
+    version: bd8baae2a8db5fd4c1829d8249d82572769873b3
+    sha1: 99a3f5f1c3429d2bd21ea8c3a5f7e1c51edd5c54
+  085f63385f5f5748e5a306f084ec2dae9b830365:
     blobstore_id: 68c02c88-34af-462d-9ae4-edf7a244eceb
-    version: !binary |-
-      MDg1ZjYzMzg1ZjVmNTc0OGU1YTMwNmYwODRlYzJkYWU5YjgzMDM2NQ==
-    sha1: !binary |-
-      NGQxZjFiN2UzNzhkM2YwMDBjZDdmNzdmYzc3M2FlY2MwMTUxMzYzMA==
-  !binary "MDBkMGVkN2Q1ODMxYjQwZDBhNTk3ZjBhNGQxZGE5N2I5YWU1YTg3OA==":
-    version: !binary |-
-      MDBkMGVkN2Q1ODMxYjQwZDBhNTk3ZjBhNGQxZGE5N2I5YWU1YTg3OA==
-    sha1: !binary |-
-      MDAxZGUzODFkMmQ2M2NlNjFkMTM5ZTAxNTk3NWQwMjAxODc4YjU0ZA==
+    version: 085f63385f5f5748e5a306f084ec2dae9b830365
+    sha1: 4d1f1b7e378d3f000cd7f77fc773aecc01513630
+  00d0ed7d5831b40d0a597f0a4d1da97b9ae5a878:
+    version: 00d0ed7d5831b40d0a597f0a4d1da97b9ae5a878
+    sha1: 001de381d2d63ce61d139e015975d0201878b54d
+  fb444fdce5f7903f513ee1c4e22bd50fccea49dd:
+    version: fb444fdce5f7903f513ee1c4e22bd50fccea49dd
+    sha1: bd97bf5439937f5695a1ee261f3666fe0ca94240
+    blobstore_id: 505520fe-470e-48e8-8d22-f9b06bc88ac1
+format-version: '2'
