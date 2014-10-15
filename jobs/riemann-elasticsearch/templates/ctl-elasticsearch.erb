@@ -17,8 +17,8 @@ case $1 in
 
     export PATH=/var/vcap/packages/ruby/bin:$PATH
 
-    bundle exec riemann-elasticsearch --host <%= properties.riemann.server %> --event-host <%= spec.index %>.<%= spec.job.name %>.<%= properties.riemann.suffix %> \
-        >>  $LOG_DIR/riemann-elasticsearch.stdout.log \
+    bundle exec riemann-elasticsearch --host <%= properties.riemann.server %> --event-host <%= spec.index %>.<%= spec.job.name %>.<%= properties.riemann.suffix %> --read-timeout 20 --open-timeout 10 \
+        >> $LOG_DIR/riemann-elasticsearch.stdout.log \
         >> $LOG_DIR/riemann-elasticsearch.stderr.log &
     echo $! > $ELASTICSEARCH_PIDFILE
 
