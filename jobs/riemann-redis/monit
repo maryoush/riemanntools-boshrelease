@@ -1,0 +1,6 @@
+
+check process riemann-redis
+  with pidfile /var/vcap/sys/run/riemann-redis/riemann_redis_pid
+  start program "/var/vcap/jobs/riemann-redis/bin/ctl-riemann-redis start"
+  stop program "/var/vcap/jobs/riemann-redis/bin/ctl-riemann-redis stop"
+  group vcap
