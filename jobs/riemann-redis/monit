@@ -4,3 +4,4 @@ check process riemann-redis
   start program "/var/vcap/jobs/riemann-redis/bin/ctl-riemann-redis start"
   stop program "/var/vcap/jobs/riemann-redis/bin/ctl-riemann-redis stop"
   group vcap
+  depends on redis

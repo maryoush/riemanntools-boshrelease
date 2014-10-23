@@ -20,7 +20,7 @@ case $1 in
 
     bundle exec riemann-redis \
         --host <%= properties.riemann.server %> \
-        --event-host <%= spec.index %>.<%= spec.job.name %>.<%= properties.riemann.suffix %>
+        --event-host <%= spec.index %>.<%= spec.job.name %>.<%= properties.riemann.suffix %> \
         --redis-section all \
         --tag redis \
         1>> $LOG_DIR/riemann-redis.stdout.log \
