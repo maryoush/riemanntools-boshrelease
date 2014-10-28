@@ -19,12 +19,12 @@ case $1 in
     export PATH=/var/vcap/packages/ruby/bin:$PATH
 
     bundle exec riemann-redis \
-        --host <%= properties.riemann.server %> \
-        --event-host <%= spec.index %>.<%= spec.job.name %>.<%= properties.riemann.suffix %> \
-        --redis-section all \
-        --tag redis \
-        1>> $LOG_DIR/riemann-redis.stdout.log \
-        2>> $LOG_DIR/riemann-redis.stderr.log &
+      --host <%= properties.riemann.server %> \
+      --event-host <%= spec.index %>.<%= spec.job.name %>.<%= spec.deployment %>.<%= properties.riemann.suffix %> \
+      --redis-section all \
+      --tag redis \
+      1>> $LOG_DIR/riemann-redis.stdout.log \
+      2>> $LOG_DIR/riemann-redis.stderr.log &
 
     echo $! > $PIDFILE
     ;;
