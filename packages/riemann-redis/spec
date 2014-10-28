@@ -1,0 +1,9 @@
+---
+name: riemann-redis
+
+dependencies:
+  - ruby
+
+files:
+  - riemann-redis/Gemfile
+  - riemann-redis/Gemfile.lock

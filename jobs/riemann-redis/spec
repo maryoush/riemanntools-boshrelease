@@ -1,0 +1,13 @@
+---
+name: riemann-redis
+
+packages:
+  - ruby
+  - riemann-redis
+
+templates:
+  ctl-riemann-redis.erb: bin/ctl-riemann-redis
+
+properties:
+  riemann.server:
+    description: "IP of the riemann server."
