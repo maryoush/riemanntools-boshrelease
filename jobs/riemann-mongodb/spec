@@ -16,5 +16,13 @@ properties:
   riemann.suffix:
     description: "Suffix for the riemann host"
     default: bosh
+  mongodb.replSet.secured:
+    description: "Specify if Replica Set will be secured"
+    default: false
   riemann.mongodb.db:
     description: "Mongodb database to monitor"
+    default: admin
+  riemann.mongodb.user:
+    description: "Mongodb database user name"
+  riemann.mongodb.pass:
+    description: "Mongodb database user password"
