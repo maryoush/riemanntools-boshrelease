@@ -5,5 +5,4 @@ dependencies:
   - ruby
 
 files:
-  - riemann-tools/Gemfile
-  - riemann-tools/Gemfile.lock
+  - riemann-tools/**/*

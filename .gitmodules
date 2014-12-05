@@ -1,3 +1,6 @@
 [submodule "packages/ruby"]
 	path = packages/ruby
 	url = https://github.com/cloudfoundry/ruby-package.git
+[submodule "src/riemann-tools"]
+	path = src/riemann-tools
+	url = https://github.com/hybris/riemann-tools.git

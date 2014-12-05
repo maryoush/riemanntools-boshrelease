@@ -1,14 +1,21 @@
 ---
 name: riemann-elasticsearch
+
 templates:
   ctl-elasticsearch.erb: bin/ctl-elasticsearch
 
 packages:
-- ruby
-- riemann-tools
+  - ruby
+  - riemann-tools
 
 properties:
-  riemann.server: 
+  riemann.server:
     description: "IP of the riemann server."
   riemann.suffix:
     description: "Suffix for the riemann host"
+  riemann.es.timeout:
+    descripton: "ES cluster health wait time to get status"
+    default: 60s
+  riemann.es.wait_for_status:
+    description: "ES cluster health status to wait for"
+    default: yellow
