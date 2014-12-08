@@ -20,8 +20,8 @@ case $1 in
     bundle exec riemann-elasticsearch \
       --host <%= properties.riemann.server %> \
       --event-host <%= spec.index %>.<%= spec.job.name %>.<%= spec.deployment %>.<%= properties.riemann.suffix %> \
-      --read-timeout 20 \
-      --open-timeout 10 \
+      --read-timeout <%= p("riemann.conn.read_timeout") %> \
+      --open-timeout <%= p("riemann.conn.open_timeout") %> \
       --es-wait-for-status <%= p("riemann.es.wait_for_status") %> \
       --es-timeout <%= p("riemann.es.timeout") %> \
       1>> $LOG_DIR/riemann-elasticsearch.stdout.log \

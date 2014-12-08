@@ -13,9 +13,15 @@ properties:
     description: "IP of the riemann server."
   riemann.suffix:
     description: "Suffix for the riemann host"
+  riemann.conn.read_timeout:
+    description: "open/read timeout in seconds"
+    default: 30
+  riemann.conn.open_timeout:
+    description: "connection open timeout in seconds"
+    default: 30
   riemann.es.timeout:
     descripton: "ES cluster health wait time to get status"
-    default: 60s
+    default: 30s
   riemann.es.wait_for_status:
     description: "ES cluster health status to wait for"
     default: yellow
