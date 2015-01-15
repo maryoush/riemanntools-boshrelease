@@ -15,7 +15,7 @@ properties:
     description: "Suffix for the riemann host"
   riemann.conn.read_timeout:
     description: "open/read timeout in seconds"
-    default: 30
+    default: 60
   riemann.conn.open_timeout:
     description: "connection open timeout in seconds"
     default: 30
