@@ -104,10 +104,19 @@ class Riemann::Tools::Mongo
 
     # Non Mapped Virtual Memory => (virtual / mapped) or mappedWithJournal?
     if metrics.has_key?("mongodb server mem mappedWithJournal")
-      nonMappedVirtualMemory = (metrics['mongodb server mem virtual'].to_f / metrics['mongodb server mem mappedWithJournal'].to_f)
+      if metrics['mongodb server mem mappedWithJournal'].to_f > 0
+		nonMappedVirtualMemory = (metrics['mongodb server mem virtual'].to_f / metrics['mongodb server mem mappedWithJournal'].to_f)
+      else
+		nonMappedVirtualMemory = 0
+      end 
     else
-      nonMappedVirtualMemory = (metrics['mongodb server mem virtual'].to_f / metrics['mongodb server mem mapped'].to_f)
+	  if metrics['mongodb server mem mapped'].to_f >0 
+		nonMappedVirtualMemory = (metrics['mongodb server mem virtual'].to_f / metrics['mongodb server mem mapped'].to_f)
+      else
+		nonMappedVirtualMemory = 0
+      end
     end
+    
     if !nonMappedVirtualMemory.is_a? Numeric
       nonMappedVirtualMemory=0
     end
