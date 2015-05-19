@@ -11,10 +11,41 @@ class Riemann::Tools::Mongo
   opt :mongo_host, "Mongo hostname", :default => 'localhost'
   opt :mongo_port, "Mongo port", :default => 27017
   opt :mongo_db, "Mongo database", :default => 'local'
+  opt :mongo_user, "Mongo user", :type => :string
+  opt :mongo_pass, "Mongo password", :type => :string
 
   def initialize
-  	@db = ::Mongo::MongoClient.new(opts[:mongo_host], opts[:mongo_port]).db(opts[:mongo_db])
-  	@cmd = {"serverStatus"=>1}
+    @db = ::Mongo::MongoClient.new(opts[:mongo_host], opts[:mongo_port]).db(opts[:mongo_db])
+    unless opts[:mongo_user].nil? || opts[:mongo_pass].nil?
+      @db.authenticate(opts[:mongo_user], opts[:mongo_pass], nil, 'admin')
+    end
+    @cmd = {"serverStatus"=>1}
+    @path = []
+    @all_values = {}
+  end
+
+  def get_all_values_nested(nested_hash={})
+    nested_hash.each_pair do |k,v|
+      @path << k
+      case v
+        when Hash then get_all_values_nested(v)
+        when Array then get_all_values_nested(Hash[v.map.with_index {|x,i| [i,x]}])
+        else
+          if v.is_a? TrueClass
+            v = 1
+          elsif v.is_a? FalseClass
+            v = 0
+          elsif (v.is_a? String and v.tr('"\'','') =~ /^[-+]?[0-9]*\.?[0-9]+$/) # match number between quotes
+            v = v.tr('"\'','').to_f
+          end
+          if (v.is_a? Numeric)
+            @all_values.merge!({"mongodb server #{@path.join(" ")}" => v.to_f})
+          end
+          @path.pop
+      end
+    end
+    @path.pop
+    return @all_values
   end
 
   def tick
@@ -22,30 +53,81 @@ class Riemann::Tools::Mongo
       response = @db.command(@cmd)
     rescue => e
       report(
-        :host    => opts[:mongo_host],
+        :host    => opts[:mongo_host].dup,
         :service => "mongodb health",
+        :state   => "critical",
+        :tags    => ["mongodb"],
         :description => "Connection error: #{e.class} - #{e.message}"
       )
     end
 
     return if response.nil?
 
-    response.each do |base_metric, rest_metric|
-      if rest_metric.is_a?(Hash)
-        rest_metric.each do |tag, value|        	
-          if !value.is_a? Fixnum
-            next
-          end
-          report(
-            :host    => opts[:mongo_host],
-            :service => "mongo." + base_metric.downcase + "." + tag.downcase,
-            :metric  => value.to_f,
-            :state   => "ok",
-            :tags    => ["mongodb"]
-          )
-        end
+    report(
+      :host    => opts[:mongo_host].dup,
+      :service => "mongodb health",
+      :state   => "ok",
+      :tags    => ["mongodb"],
+      :description => "mongodb connection status ok"
+    )
+
+    metrics = get_all_values_nested(response)
+    metrics.each do |metric, value|
+      if  (metric !~ /mongodb server (recordStats|locks) .+/) ||
+          (metric =~ /mongodb server locks (\.|admin|local)/) ||
+          (metric =~ /mongodb server recordStats (admin|local|accessesNotInMemory|pageFaultExceptionsThrown)/)
+        report(
+          :host        => opts[:mongo_host].dup,
+          :service     => metric,
+          :metric      => value.to_f,
+          :state       => "ok",
+          :tags        => ["mongodb"],
+          :description => ""
+        )
       end
     end
+
+    # lock_percentage => (lockTime / totalTime) * 100
+    lockPercentage = ((metrics['mongodb server globalLock lockTime'].to_f / metrics['mongodb server globalLock totalTime'].to_f) * 100)
+    if !lockPercentage.is_a? Numeric
+      lockPercentage=0
+    end
+    report(
+      :host    => opts[:mongo_host].dup,
+      :service => "mongodb server globalLock lockPercentage",
+      :metric  => lockPercentage.to_f,
+      :state   => "ok",
+      :tags    => ["mongodb"],
+      :description => ""
+    )
+
+
+    # Non Mapped Virtual Memory => (virtual / mapped) or mappedWithJournal?
+    if metrics.has_key?("mongodb server mem mappedWithJournal")
+      if metrics['mongodb server mem mappedWithJournal'].to_f > 0
+		nonMappedVirtualMemory = (metrics['mongodb server mem virtual'].to_f / metrics['mongodb server mem mappedWithJournal'].to_f)
+      else
+		nonMappedVirtualMemory = 0
+      end 
+    else
+	  if metrics['mongodb server mem mapped'].to_f >0 
+		nonMappedVirtualMemory = (metrics['mongodb server mem virtual'].to_f / metrics['mongodb server mem mapped'].to_f)
+      else
+		nonMappedVirtualMemory = 0
+      end
+    end
+    
+    if !nonMappedVirtualMemory.is_a? Numeric
+      nonMappedVirtualMemory=0
+    end
+    report(
+      :host    => opts[:mongo_host].dup,
+      :service => "mongodb server mem nonMappedVirtualMemory",
+      :metric  => nonMappedVirtualMemory.to_f,
+      :state   => "ok",
+      :tags    => ["mongodb"],
+      :description => ""
+    )
   end
 end
 

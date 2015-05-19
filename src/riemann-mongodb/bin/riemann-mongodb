@@ -11,28 +11,37 @@ class Riemann::Tools::Mongo
   opt :mongo_host, "Mongo hostname", :default => 'localhost'
   opt :mongo_port, "Mongo port", :default => 27017
   opt :mongo_db, "Mongo database", :default => 'local'
+  opt :mongo_user, "Mongo user", :type => :string
+  opt :mongo_pass, "Mongo password", :type => :string
 
   def initialize
     @db = ::Mongo::MongoClient.new(opts[:mongo_host], opts[:mongo_port]).db(opts[:mongo_db])
+    unless opts[:mongo_user].nil? || opts[:mongo_pass].nil?
+      @db.authenticate(opts[:mongo_user], opts[:mongo_pass], nil, 'admin')
+    end
   end
 
   def tick
     begin
       @db.stats.each do |property, value|
-        data = {
-          :host    => opts[:mongo_host].dup,
-          :service => "mongodb #{property}",
-          :metric  => value.to_s,
-          :state   => value.to_s,
-          :tags    => ['mongodb']
-        }
-
-        report(data)
+        if value.is_a? TrueClass
+          value = 1
+        elsif value.is_a? FalseClass
+          value = 0
+        end
+        if (value.is_a? Numeric)
+          report(
+            :host        => opts[:mongo_host].dup,
+            :service     => "mongodb #{property}",
+            :metric      => value.to_f,
+            :state       => "ok",
+            :tags        => ["mongodb"],
+            :description => ""
+          )
+        end
       end
     end
-
   end
-
 end
 
 Riemann::Tools::Mongo.run

@@ -12,10 +12,41 @@ class Riemann::Tools::Mongo
   opt :mongo_host, "Mongo hostname", :default => 'localhost'
   opt :mongo_port, "Mongo port", :default => 27017
   opt :mongo_db, "Mongo database", :default => 'admin'
+  opt :mongo_user, "Mongo user", :type => :string
+  opt :mongo_pass, "Mongo password", :type => :string
 
   def initialize
     @db = ::Mongo::MongoClient.new(opts[:mongo_host], opts[:mongo_port]).db(opts[:mongo_db])
+    unless opts[:mongo_user].nil? || opts[:mongo_pass].nil?
+      @db.authenticate(opts[:mongo_user], opts[:mongo_pass], nil, 'admin')
+    end
     @cmd = {"replSetGetStatus"=>1}
+    @path = []
+    @all_values = {}
+  end
+
+  def get_all_values_nested(nested_hash={})
+    nested_hash.each_pair do |k,v|
+      @path << k
+      case v
+        when Hash then get_all_values_nested(v)
+        when Array then get_all_values_nested(Hash[v.map.with_index {|x,i| [i,x]}])
+        else
+          if v.is_a? TrueClass
+            v = 1
+          elsif v.is_a? FalseClass
+            v = 0
+          elsif (v.is_a? String and v.tr('"\'','') =~ /^[-+]?[0-9]*\.?[0-9]+$/) # match number between quotes
+            v = v.tr('"\'','').to_f
+          end
+          if (v.is_a? Numeric)
+            @all_values.merge!({"mongodb rs #{@path.join(" ")}" => v.to_f})
+          end
+          @path.pop
+      end
+    end
+    @path.pop
+    return @all_values
   end
 
   def tick
@@ -25,6 +56,8 @@ class Riemann::Tools::Mongo
       report(
         :host    => opts[:host_prefix] + opts[:mongo_host].dup,
         :service => "mongodb health",
+        :state   => "critical",
+        :tags    => ["mongodb"],
         :description => "Connection error: #{e.class} - #{e.message}"
       )
     end
@@ -35,24 +68,23 @@ class Riemann::Tools::Mongo
       :host    => opts[:host_prefix] + opts[:mongo_host].dup,
       :service => "mongodb health",
       :state   => "ok",
+      :tags    => ["mongodb"],
       :description => "mongodb connection status ok"
     )
 
-    response["members"].each do |member|
-      member.each do |property, value|
-        data = {
-          :host    => opts[:host_prefix] + opts[:mongo_host].dup,
-          :service => "mongodb #{property}",
-          :metric  => value.to_s,
-          :state   => value.to_s,
-          :tags    => ['mongodb']
-        }
 
-        report(data)
-      end
+    metrics = get_all_values_nested(response)
+    metrics.each do |metric, value|
+      report(
+        :host        => opts[:host_prefix] + opts[:mongo_host].dup,
+        :service     => metric,
+        :metric      => value.to_f,
+        :state       => "ok",
+        :tags        => ["mongodb"],
+        :description => ""
+      )
     end
   end
-
 end
 
 Riemann::Tools::Mongo.run
