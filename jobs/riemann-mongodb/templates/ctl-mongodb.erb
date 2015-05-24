@@ -29,6 +29,12 @@ case $1 in
       --mongo-pass <%= properties.riemann.mongodb.pass %> \
       <% end %> \
       <% end %> \
+      <% unless properties.riemann.mongodb.host.nil? %> \
+      --mongo-host=<%= properties.riemann.mongodb.host %> \
+      <% end %> \
+      <% unless properties.riemann.mongodb.port.nil? %> \
+      --mongo-port=<%= properties.riemann.mongodb.port %> \
+      <% end %> \
       1>> $LOG_DIR/riemann-mongodb.stdout.log \
       2>> $LOG_DIR/riemann-mongodb.stderr.log &
 
