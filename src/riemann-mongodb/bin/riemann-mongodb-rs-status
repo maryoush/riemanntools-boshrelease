@@ -16,9 +16,15 @@ class Riemann::Tools::Mongo
   opt :mongo_pass, "Mongo password", :type => :string
 
   def initialize
-    @db = ::Mongo::MongoClient.new(opts[:mongo_host], opts[:mongo_port]).db(opts[:mongo_db])
-    unless opts[:mongo_user].nil? || opts[:mongo_pass].nil?
-      @db.authenticate(opts[:mongo_user], opts[:mongo_pass], nil, 'admin')
+    begin
+      puts "Creating authenticated client"
+      @db = ::Mongo::MongoClient.new(opts[:mongo_host], opts[:mongo_port]).db(opts[:mongo_db])
+      unless opts[:mongo_user].nil? || opts[:mongo_pass].nil?
+        @db.authenticate(opts[:mongo_user], opts[:mongo_pass], nil, 'admin')
+      end
+    rescue ::Mongo::AuthenticationError
+      puts "Authentication failed: Creating client without authentication"
+      @db = ::Mongo::MongoClient.new(opts[:mongo_host], opts[:mongo_port]).db(opts[:mongo_db])
     end
     @cmd = {"replSetGetStatus"=>1}
     @path = []
