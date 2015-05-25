@@ -15,9 +15,15 @@ class Riemann::Tools::Mongo
   opt :mongo_pass, "Mongo password", :type => :string
 
   def initialize
-    @db = ::Mongo::MongoClient.new(opts[:mongo_host], opts[:mongo_port]).db(opts[:mongo_db])
-    unless opts[:mongo_user].nil? || opts[:mongo_pass].nil?
-      @db.authenticate(opts[:mongo_user], opts[:mongo_pass], nil, 'admin')
+    begin
+      puts "Creating authenticated client"
+      @db = ::Mongo::MongoClient.new(opts[:mongo_host], opts[:mongo_port]).db(opts[:mongo_db])
+      unless opts[:mongo_user].nil? || opts[:mongo_pass].nil?
+        @db.authenticate(opts[:mongo_user], opts[:mongo_pass], nil, 'admin')
+      end
+    rescue ::Mongo::AuthenticationError
+      puts "Authentication failed: Creating client without authentication"
+      @db = ::Mongo::MongoClient.new(opts[:mongo_host], opts[:mongo_port]).db(opts[:mongo_db])
     end
     @cmd = {"serverStatus"=>1}
     @path = []
@@ -108,15 +114,15 @@ class Riemann::Tools::Mongo
 		nonMappedVirtualMemory = (metrics['mongodb server mem virtual'].to_f / metrics['mongodb server mem mappedWithJournal'].to_f)
       else
 		nonMappedVirtualMemory = 0
-      end 
+      end
     else
-	  if metrics['mongodb server mem mapped'].to_f >0 
+	  if metrics['mongodb server mem mapped'].to_f >0
 		nonMappedVirtualMemory = (metrics['mongodb server mem virtual'].to_f / metrics['mongodb server mem mapped'].to_f)
       else
 		nonMappedVirtualMemory = 0
       end
     end
-    
+
     if !nonMappedVirtualMemory.is_a? Numeric
       nonMappedVirtualMemory=0
     end

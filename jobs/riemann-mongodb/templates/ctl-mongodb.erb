@@ -21,13 +21,13 @@ case $1 in
     bundle exec riemann-mongodb \
       --host <%= properties.riemann.server %> \
       --event-host <%= spec.index %>.<%= spec.job.name %>.<%= spec.deployment %>.<%= properties.riemann.suffix %> \
+      <% unless properties.riemann.mongodb.db.nil? %> \
       --mongo-db <%= properties.riemann.mongodb.db %> \
+      <% end %> \
       --tag mongodb \
-      <% if properties.mongodb.replSet.secured %> \
       <% unless properties.riemann.mongodb.user.nil? or properties.riemann.mongodb.pass.nil? %> \
       --mongo-user <%= properties.riemann.mongodb.user %> \
       --mongo-pass <%= properties.riemann.mongodb.pass %> \
-      <% end %> \
       <% end %> \
       <% unless properties.riemann.mongodb.host.nil? %> \
       --mongo-host=<%= properties.riemann.mongodb.host %> \
