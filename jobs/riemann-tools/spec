@@ -8,6 +8,8 @@ packages:
 templates:
   ctl-net.erb: bin/ctl-net
   ctl-health.erb: bin/ctl-health
+  ctl-diskstats.erb: bin/ctl-diskstats
+  ctl-fd.erb: bin/ctl-fd
 
 properties:
   riemann.server:
@@ -15,3 +17,9 @@ properties:
   riemann.suffix:
     description: "Suffix for the riemann host"
     default: bosh
+  fd.sys_warning:
+    description: "open file descriptor threshold for system"
+    default: 10000
+  fd.sys_critical:
+    description: "open file descriptor critical threshold for system"
+    default: 50000
