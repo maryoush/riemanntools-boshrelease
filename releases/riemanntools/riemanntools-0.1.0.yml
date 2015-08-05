@@ -1,0 +1,84 @@
+---
+packages:
+- name: riemann-mongodb
+  version: !binary |-
+    YWZlOWJiZmJmZjhhMDAxMzQzZThlZmQ5M2MzZGUzMzZlYzMwNTAwMA==
+  fingerprint: !binary |-
+    YWZlOWJiZmJmZjhhMDAxMzQzZThlZmQ5M2MzZGUzMzZlYzMwNTAwMA==
+  sha1: !binary |-
+    N2I1ZTEzNmY5MDFlMTJmNWQ2YzA0MzMzMTE3M2U5ZmMyNzg3MWFmZA==
+  dependencies:
+  - ruby
+- name: riemann-redis
+  version: !binary |-
+    MDMzOWRiOTljYTkzZTY0ZTkzNGYxMTZiMmUyMjczZDM0YzE2ZjNlYQ==
+  fingerprint: !binary |-
+    MDMzOWRiOTljYTkzZTY0ZTkzNGYxMTZiMmUyMjczZDM0YzE2ZjNlYQ==
+  sha1: !binary |-
+    Njc5ZjViMzE0NjJiNTY0ODQ3MzJkMjhmZTkzNmU2Nzk5ODNkMjlkOQ==
+  dependencies:
+  - ruby
+- name: riemann-tools
+  version: !binary |-
+    NmNlMmRmMTJmNjRkZjUxYmU4YjE5ZDA0NTkzZWI3YjMxN2NlN2NmYg==
+  fingerprint: !binary |-
+    NmNlMmRmMTJmNjRkZjUxYmU4YjE5ZDA0NTkzZWI3YjMxN2NlN2NmYg==
+  sha1: !binary |-
+    YTY5MDdmNDA0ZmJkZTBkZTkzYjQ0ZDQ0MjUyMjYzZmNjN2QzNjUxZg==
+  dependencies:
+  - ruby
+- name: ruby
+  version: !binary |-
+    OWI1OWQyZjI3MDBkYTgxYTk4YzM4YzczY2QyN2I2Y2NmMjZmMTg4Yw==
+  fingerprint: !binary |-
+    OWI1OWQyZjI3MDBkYTgxYTk4YzM4YzczY2QyN2I2Y2NmMjZmMTg4Yw==
+  sha1: !binary |-
+    YmNhMDAzZWM0N2M3MWQzMTRiOGMxZjBiZjk0Y2YxZGRiM2ZiZDg2OA==
+  dependencies: []
+jobs:
+- name: riemann-elasticsearch
+  version: !binary |-
+    OWY2YjMyYjc4MjA4OTA1OWIzNmQxZGJiODM4YThkZTU4ZDhkMDU5ZA==
+  fingerprint: !binary |-
+    OWY2YjMyYjc4MjA4OTA1OWIzNmQxZGJiODM4YThkZTU4ZDhkMDU5ZA==
+  sha1: !binary |-
+    ODU2MTAxYTE1MjM0YjQwOGQxY2I3MzdmMTNmOTNiYmZkNzYyYTJjNA==
+- name: riemann-mongodb
+  version: !binary |-
+    NDU0NzJjMjhjMGU4YmJiYzdhMzA3YjY4YzdmYWFjMmY2YWU4OTNhZg==
+  fingerprint: !binary |-
+    NDU0NzJjMjhjMGU4YmJiYzdhMzA3YjY4YzdmYWFjMmY2YWU4OTNhZg==
+  sha1: !binary |-
+    N2E4NTkzMWNmOGE2YzhkZTA2ODM3OWEzMDEwMWNhYzQzOGY4Nzc4ZQ==
+- name: riemann-redis
+  version: !binary |-
+    YTM4MjA2M2ZhZDhmZGQ4ZmVmZWU0ODliM2U5NWNiYWQ5ZTRiYWFmZA==
+  fingerprint: !binary |-
+    YTM4MjA2M2ZhZDhmZGQ4ZmVmZWU0ODliM2U5NWNiYWQ5ZTRiYWFmZA==
+  sha1: !binary |-
+    MWJhZjAxZTE1NmUxMDI4ODI1MzYwNjVlMzU2YzFiMTQ0NDgzYzk5ZQ==
+- name: riemann-tools
+  version: !binary |-
+    NzYyY2VmMTg1NDkyNTQ3MDg3MDdiMzMzMTZlMzczZGI1YjUxNzI0Mw==
+  fingerprint: !binary |-
+    NzYyY2VmMTg1NDkyNTQ3MDg3MDdiMzMzMTZlMzczZGI1YjUxNzI0Mw==
+  sha1: !binary |-
+    NTY4NTRkY2EzOThkYmRiNmEwM2QyYTMzOWUyZWZmN2Q3YjBhMzI2OA==
+- name: riemann-zookeeper
+  version: !binary |-
+    ZDhlYzU3YjE4ZDc2NmRhZDA3YmI4NzA5N2MxNzViZGNiYzhkMTU3Mg==
+  fingerprint: !binary |-
+    ZDhlYzU3YjE4ZDc2NmRhZDA3YmI4NzA5N2MxNzViZGNiYzhkMTU3Mg==
+  sha1: !binary |-
+    ZTIxOTk1MzkxYzg5ODQ5Mjc0ZTNhZmE4ZWJiMzMxNDIwZDliOWU1ZQ==
+license:
+  version: !binary |-
+    NTY5YTQ4MTY2M2Y5NWIxMGNiODAzNTM5YmE2MWE4YzI0YTg4MTQ2Mw==
+  fingerprint: !binary |-
+    NTY5YTQ4MTY2M2Y5NWIxMGNiODAzNTM5YmE2MWE4YzI0YTg4MTQ2Mw==
+  sha1: !binary |-
+    ZDY3ODU4ZjI5YmM5NjA2NzI5NDYwNjBmOWNlNDBhYjYxYTA3ZjM0MQ==
+commit_hash: bc914d52
+uncommitted_changes: true
+name: riemanntools
+version: 0.1.0
