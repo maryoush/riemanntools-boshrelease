@@ -18,6 +18,8 @@ properties:
     default: bosh
   riemann.mongodb.db:
     description: "Mongodb database to monitor"
+  riemann.mongodb.host:
+    description: "Mongodb database host"
   riemann.mongodb.user:
     description: "Mongodb database user name"
   riemann.mongodb.pass:

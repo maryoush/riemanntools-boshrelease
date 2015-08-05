@@ -13,6 +13,7 @@ jobs:
     templates:
     - name: riemann-tools
       release: riemanntools
+    # can't test then without their related process
     # - name: riemann-elasticsearch
     #   release: riemanntools
     # - name: riemann-mongodb
