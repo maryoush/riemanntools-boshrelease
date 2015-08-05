@@ -9,14 +9,26 @@ update:
   serial: false
 
 jobs:
-  - name: just_install_packages
+  - name: riemanntools
     templates:
-    - name: just_install_packages
+    - name: riemann-tools
       release: riemanntools
+    # - name: riemann-elasticsearch
+    #   release: riemanntools
+    # - name: riemann-mongodb
+    #   release: riemanntools
+    # - name: riemann-redis
+    #   release: riemanntools
+    # - name: riemann-zookeeper
+    #   release: riemanntools
     instances: 1
     persistent_disk: 0
     resource_pool: small_z1
     networks: (( merge ))
+    properties:
+      riemann:
+        server: 127.0.0.1
+        suffix: test
 
 networks: (( merge ))
 
