@@ -13,6 +13,8 @@ jobs:
     templates:
     - name: riemann-tools
       release: riemanntools
+    - name: riemann-disk
+      release: riemanntools
     # can't test then without their related process
     # - name: riemann-elasticsearch
     #   release: riemanntools
