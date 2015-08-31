@@ -2,4 +2,6 @@
 builds:
   82e13d90-fe70-48cc-af8f-a37eb6594e18:
     version: 0.1.0
+  04cafb72-fb49-4096-b20b-7e7135e952d7:
+    version: 0.2.0
 format-version: '2'
