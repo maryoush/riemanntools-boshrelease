@@ -1,13 +1,11 @@
 ---
-name: riemann-tools
+name: riemann-disk
 
 packages:
   - ruby
   - riemann-tools
 
 templates:
-  ctl-net.erb: bin/ctl-net
-  ctl-health.erb: bin/ctl-health
   ctl-diskstats.erb: bin/ctl-diskstats
   ctl-fd.erb: bin/ctl-fd
 
