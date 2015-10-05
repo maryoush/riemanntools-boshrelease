@@ -1,0 +1,5 @@
+check process riemann-cassandra
+  with pidfile /var/vcap/sys/run/riemann-cassandra/riemann-cassandra_pid
+  start program "/var/vcap/jobs/riemann-cassandra/bin/ctl-riemann-cassandra start"
+  stop program "/var/vcap/jobs/riemann-cassandra/bin/ctl-riemann-cassandra stop"
+  group vcap

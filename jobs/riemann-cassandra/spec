@@ -1,0 +1,28 @@
+---
+name: riemann-cassandra
+
+templates:
+  ctl-riemann-cassandra.erb: bin/ctl-riemann-cassandra
+  data/properties.sh.erb: data/properties.sh
+  helpers/ctl_setup.sh: helpers/ctl_setup.sh
+  helpers/ctl_utils.sh: helpers/ctl_utils.sh
+
+packages:
+  - java_for_riemanntools
+  - riemann-cassandra
+
+properties:
+  riemann.server:
+    description: "IP of the riemann server."
+  riemann.port:
+    description: "Port on which the riemann server is available."
+  cassandra.host:
+    description: "IP of the cassandra server."
+  cassandra.jmx.port:
+    description: "Jmx port for cassandra."
+  cassandra.jmx.username:
+    description: "Jmx user name."
+  cassandra.jmx.password:
+    description: "Jmx password."
+  riemann.cassandra.interval:
+    description: "Riemann cassandra refresh interval."

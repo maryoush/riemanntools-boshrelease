@@ -18,6 +18,8 @@ jobs:
     #   release: riemanntools
     # - name: riemann-elasticsearch
     #   release: riemanntools
+    #  - name: riemann-cassandra
+    #    release: riemanntools
     # - name: riemann-mongodb
     #   release: riemanntools
     # - name: riemann-redis
