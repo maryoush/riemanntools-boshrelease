@@ -1,0 +1,7 @@
+---
+name: riemann-cassandra
+
+dependencies: []
+
+files:
+  - riemann-cassandra/riemann-cassandra-0.0.3.jar  #ssh://git@stash.hybris.com:7999/wombat/riemann-cassandra.git
