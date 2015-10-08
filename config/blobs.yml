@@ -15,11 +15,11 @@ ruby/yaml-0.1.5.tar.gz:
   object_id: 6cf011d7-6362-435e-8456-2998d32edad7
   sha: 8b78cb9f759c7d80db8a7328c0ebecfe34fde737
   size: 504897
-java/openjdk-jre-trusty-1.7.0_65.tar.gz/openjdk-jre-trusty-1.7.0_65.tar.gz:
+java/openjdk-jre-trusty-1.7.0_65.tar.gz:
   object_id: fc5be61c-2dce-4dc2-ae5d-96602320a01f
   sha: 65f4e665b0a736e861fedaa60560ba72ed19474c
   size: 31606629
-riemann-cassandra/riemann-cassandra-0.0.3.jar/riemann-cassandra-0.0.3.jar:
+riemann-cassandra/riemann-cassandra-0.0.3.jar:
   object_id: 4332296f-cdcb-4432-90e6-ddab8eba233d
   sha: db0a70617341e0d1def9b8fd762a08ac7bce9fba
   size: 12267011
