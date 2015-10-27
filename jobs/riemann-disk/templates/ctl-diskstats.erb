@@ -3,9 +3,9 @@
 set -e # exit immediately if a simple command exits with a non-zero status
 set -u # report the usage of uninitialized variables
 
-RUN_DIR=/var/vcap/sys/run/riemann-tools
-LOG_DIR=/var/vcap/sys/log/riemann-tools
-JOB_DIR=/var/vcap/jobs/riemann-tools
+RUN_DIR=/var/vcap/sys/run/riemann-disk
+LOG_DIR=/var/vcap/sys/log/riemann-disk
+JOB_DIR=/var/vcap/jobs/riemann-disk
 PIDFILE=${RUN_DIR}/diskstats_pid
 
 case $1 in

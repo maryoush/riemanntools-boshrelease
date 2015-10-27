@@ -1,11 +1,11 @@
 check process riemann-fd
-  with pidfile /var/vcap/sys/run/riemann-tools/fd_pid
-  start program "/var/vcap/jobs/riemann-tools/bin/ctl-fd start"
-  stop program "/var/vcap/jobs/riemann-tools/bin/ctl-fd stop"
+  with pidfile /var/vcap/sys/run/riemann-disk/fd_pid
+  start program "/var/vcap/jobs/riemann-disk/bin/ctl-fd start"
+  stop program "/var/vcap/jobs/riemann-disk/bin/ctl-fd stop"
   group vcap
 
 check process riemann-diskstats
-  with pidfile /var/vcap/sys/run/riemann-tools/diskstats_pid
-  start program "/var/vcap/jobs/riemann-tools/bin/ctl-diskstats start"
-  stop program "/var/vcap/jobs/riemann-tools/bin/ctl-diskstats stop"
+  with pidfile /var/vcap/sys/run/riemann-disk/diskstats_pid
+  start program "/var/vcap/jobs/riemann-disk/bin/ctl-diskstats start"
+  stop program "/var/vcap/jobs/riemann-disk/bin/ctl-diskstats stop"
   group vcap

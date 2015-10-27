@@ -15,9 +15,17 @@ properties:
   riemann.suffix:
     description: "Suffix for the riemann host"
     default: bosh
-  fd.sys_warning:
+  riemann.fd.sys_warning:
     description: "open file descriptor threshold for system"
-    default: 10000
-  fd.sys_critical:
+    default: 800
+  riemann.fd.sys_critical:
     description: "open file descriptor critical threshold for system"
-    default: 50000
+    default: 900
+  riemann.fd.proc_warning:
+    description: "open file descriptor threshold for process"
+    default: 800
+  riemann.fd.proc_critical:
+    description: "open file descriptor critical threshold for process"
+    default: 900
+  riemann.fd.processes:
+    description: "list of processes id to measure fd usage in addition to system total"

@@ -3,9 +3,9 @@
 set -e # exit immediately if a simple command exits with a non-zero status
 set -u # report the usage of uninitialized variables
 
-RUN_DIR=/var/vcap/sys/run/riemann-tools
-LOG_DIR=/var/vcap/sys/log/riemann-tools
-JOB_DIR=/var/vcap/jobs/riemann-tools
+RUN_DIR=/var/vcap/sys/run/riemann-disk
+LOG_DIR=/var/vcap/sys/log/riemann-disk
+JOB_DIR=/var/vcap/jobs/riemann-disk
 PIDFILE=${RUN_DIR}/fd_pid
 
 case $1 in
@@ -18,9 +18,18 @@ case $1 in
 
     export PATH=/var/vcap/packages/ruby/bin:$PATH
 
-    bundle exec riemann-fd --host <%= properties.riemann.server %> --event-host <%= spec.index %>.<%= spec.job.name %>.<%= properties.riemann.suffix %> \
-        1>> $LOG_DIR/riemann-fd.stdout.log \
-        2>> $LOG_DIR/riemann-fd.stderr.log &
+    bundle exec riemann-fd \
+      --host <%= properties.riemann.server %> \
+      --event-host <%= spec.index %>.<%= spec.job.name %>.<%= properties.riemann.suffix %> \
+      --fd-sys-warning <%= properties.riemann.fd.sys_warning %> \
+      --fd-sys-critical <%= properties.riemann.fd.sys_critical %> \
+      <% unless properties.riemann.fd.processes.nil? %> \
+      --fd-proc-warning <%= properties.riemann.fd.proc_warning %> \
+      --fd-proc-critical <%= properties.riemann.fd.proc_critical %> \
+      --processes <%= properties.riemann.fd.processes %> \
+      <% end %> \
+      1>> $LOG_DIR/riemann-fd.stdout.log \
+      2>> $LOG_DIR/riemann-fd.stderr.log &
 
     echo $! > $PIDFILE
     ;;
