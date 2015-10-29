@@ -34,6 +34,8 @@ jobs:
       riemann:
         server: 127.0.0.1
         suffix: test
+        fd:
+          processes: true
 
 networks: (( merge ))
 

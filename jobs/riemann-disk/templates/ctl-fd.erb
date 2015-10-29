@@ -15,7 +15,6 @@ case $1 in
     chown -R vcap:vcap $RUN_DIR $LOG_DIR
 
     cd /var/vcap/packages/riemann-tools/riemann-tools
-
     export PATH=/var/vcap/packages/ruby/bin:$PATH
 
     bundle exec riemann-fd \
@@ -23,10 +22,10 @@ case $1 in
       --event-host <%= spec.index %>.<%= spec.job.name %>.<%= properties.riemann.suffix %> \
       --fd-sys-warning <%= properties.riemann.fd.sys_warning %> \
       --fd-sys-critical <%= properties.riemann.fd.sys_critical %> \
-      <% unless properties.riemann.fd.processes.nil? %> \
+      <% if properties.riemann.fd.processes %> \
       --fd-proc-warning <%= properties.riemann.fd.proc_warning %> \
       --fd-proc-critical <%= properties.riemann.fd.proc_critical %> \
-      --processes <%= properties.riemann.fd.processes %> \
+      --processes true \
       <% end %> \
       1>> $LOG_DIR/riemann-fd.stdout.log \
       2>> $LOG_DIR/riemann-fd.stderr.log &
