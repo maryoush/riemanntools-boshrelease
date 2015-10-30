@@ -7,6 +7,7 @@ templates:
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
   riemann-neo4j.yaml.erb: config/riemann-neo4j.yaml
+
 packages:
   - java_for_riemanntools
   - riemann-neo4j
@@ -19,11 +20,11 @@ properties:
   riemann.interval:
     description: "Riemann neo4j refresh interval."
   riemann.prefix.env:
-      description: "Environment prefix to be used in report to riemann server"
+    description: "Environment prefix to be used in report to riemann server"
   riemann.prefix.team:
-          description: "Team prefix to be used in report to riemann server"
+    description: "Team prefix to be used in report to riemann server"
   riemann.prefix.host:
-      description: "Host prefix to be used in report to riemann server"
+    description: "Host prefix to be used in report to riemann server"
   neo4j.server.ip:
     description: "IP of the neo4j server."
   neo4j.jmx.port:

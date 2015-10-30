@@ -34,7 +34,7 @@ jmx :
     port : <%= p('neo4j.jmx.port') %>
     # username & password are optional; they're used for authenticated JMX
     <% if_p("neo4j.jmx.username") do %>username=<%= p("neo4j.jmx.username") %><% end %>
-    <% if_p("neo4j.jmx.password") do %>password=<%= p("neo4j.jmx.password'") %><% end %>
+    <% if_p("neo4j.jmx.password") do %>password=<%= p("neo4j.jmx.password") %><% end %>
 
 queries :
     # If service is set, its value will be used to set Riemann Event service (RES) field.

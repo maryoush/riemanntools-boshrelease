@@ -23,3 +23,7 @@ riemann-cassandra/riemann-cassandra-0.0.3.jar:
   object_id: 4332296f-cdcb-4432-90e6-ddab8eba233d
   sha: db0a70617341e0d1def9b8fd762a08ac7bce9fba
   size: 12267011
+riemann-neo4j/riemann-jmx-clj-0.1.0-standalone.jar:
+  object_id: 1d453b84-ca53-4d4d-a974-9d8b976551fe
+  sha: 72d76a3ccd1bc9a0296fae2a32d633ff876d5d4e
+  size: 6103324

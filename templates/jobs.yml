@@ -16,10 +16,12 @@ jobs:
       - name: riemann-disk
         release: riemanntools
       # can't test then without their related services
+      # - name: riemann-neo4j
+      #   release: riemanntools
       # - name: riemann-elasticsearch
       #   release: riemanntools
-      #  - name: riemann-cassandra
-      #    release: riemanntools
+      # - name: riemann-cassandra
+      #   release: riemanntools
       # - name: riemann-mongodb
       #   release: riemanntools
       # - name: riemann-redis
