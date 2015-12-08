@@ -19,7 +19,7 @@ case $1 in
 
     bundle exec riemann-fd \
       --host <%= properties.riemann.server %> \
-      --event-host <%= spec.index %>.<%= spec.job.name %>.<%= properties.riemann.suffix %> \
+      --event-host <%= spec.index %>.<%= spec.job.name %>.<%= spec.deployment %>.<%= properties.riemann.suffix %> \
       --fd-sys-warning <%= properties.riemann.fd.sys_warning %> \
       --fd-sys-critical <%= properties.riemann.fd.sys_critical %> \
       <% if properties.riemann.fd.processes %> \
