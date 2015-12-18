@@ -7,7 +7,6 @@ packages:
 
 templates:
   ctl-diskstats.erb: bin/ctl-diskstats
-  ctl-fd.erb: bin/ctl-fd
 
 properties:
   riemann.server:
@@ -15,18 +14,3 @@ properties:
   riemann.suffix:
     description: "Suffix for the riemann host"
     default: bosh
-  riemann.fd.sys_warning:
-    description: "open file descriptor threshold for system (percentage)"
-    default: 80
-  riemann.fd.sys_critical:
-    description: "open file descriptor critical threshold for system (percentage)"
-    default: 95
-  riemann.fd.proc_warning:
-    description: "open file descriptor threshold for process (percentage)"
-    default: 80
-  riemann.fd.proc_critical:
-    description: "open file descriptor critical threshold for process (percentage)"
-    default: 95
-  riemann.fd.processes:
-    description: "Monitor processes to measure fd usage in addition to system total"
-    default: false

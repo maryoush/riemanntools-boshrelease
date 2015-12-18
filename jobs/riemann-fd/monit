@@ -1,0 +1,5 @@
+check process riemann-fd
+  with pidfile /var/vcap/sys/run/riemann-disk/fd_pid
+  start program "/var/vcap/jobs/riemann-disk/bin/ctl-fd start"
+  stop program "/var/vcap/jobs/riemann-disk/bin/ctl-fd stop"
+  group vcap
