@@ -3,4 +3,5 @@ final_name: riemanntools
 blobstore:
   provider: s3
   options:
-    bucket_name: blobs-yaas-idefix/riemanntools-boshrelease
+    folder: riemanntools-boshrelease
+    bucket_name: blobs-yaas-idefix
