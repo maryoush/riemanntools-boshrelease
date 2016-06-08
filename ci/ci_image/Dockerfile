@@ -1,5 +1,4 @@
-FROM concourse/concourse-ci
-# https://github.com/concourse/concourse/blob/master/ci/dockerfiles/concourse-ci/Dockerfile
+FROM teamidefix/credentials-generator
 
 RUN apt-get update && apt-get install curl wget bzr strace -y
 
@@ -17,4 +16,3 @@ ENV GOPATH /gopath
 ENV PATH $GOROOT/bin:$GOPATH/bin:$PATH
 
 RUN go get github.com/bronze1man/yaml2json
-RUN go get github.com/cloudfoundry-community/humanize-manifest
