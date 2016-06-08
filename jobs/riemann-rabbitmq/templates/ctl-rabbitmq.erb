@@ -28,9 +28,9 @@ case $1 in
     bundle exec riemann-rabbitmq \
       --host <%= properties.riemann.server %> \
       --event-host <%= spec.index %>.<%= spec.job.name %>.<%= spec.deployment %>.<%= properties.riemann.suffix %> \
-      --monitor-user <%= properties.rabbitmq.user %> \
-      --monitor-pass <%= properties.rabbitmq.password %> \
-      --max-queue-size <%= properties.rabbitmq.maxqueuesize %> \
+      --monitor-user <%= properties.riemann.rabbitmq.user %> \
+      --monitor-pass <%= properties.riemann.rabbitmq.password %> \
+      --max-queue-size <%= properties.riemann.rabbitmq.maxqueuesize %> \
       --node rabbit@<%= JOB_IP_MD5 %> \
       1>> $LOG_DIR/riemann-rabbitmq.stdout.log \
       2>> $LOG_DIR/riemann-rabbitmq.stderr.log &

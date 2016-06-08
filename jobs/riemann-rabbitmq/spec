@@ -14,10 +14,10 @@ properties:
   riemann.suffix:
     description: "Suffix for the riemann host"
     default: bosh
-  rabbitmq.user:
+  riemann.rabbitmq.user:
     description: "User used to connect to rabbitmq"
-  rabbitmq.password:
+  riemann.rabbitmq.password:
     description: "Password used to connect to rabbitmq"
-  rabbitmq.maxqueuesize:
+  riemann.rabbitmq.maxqueuesize:
     description: "Maximum queue size"
     default: 1_000_000
