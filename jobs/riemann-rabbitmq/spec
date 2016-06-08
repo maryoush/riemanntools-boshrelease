@@ -1,0 +1,23 @@
+---
+name: riemann-rabbitmq
+
+packages:
+  - riemann-tools
+  - riemann-rabbitmq
+
+templates:
+  ctl-rabbitmq.erb: bin/ctl-rabbitmq
+
+properties:
+  riemann.server:
+    description: "IP of the riemann server."
+  riemann.suffix:
+    description: "Suffix for the riemann host"
+    default: bosh
+  rabbitmq.user:
+    description: "User used to connect to rabbitmq"
+  rabbitmq.password:
+    description: "Password used to connect to rabbitmq"
+  rabbitmq.maxqueuesize:
+    description: "Maximum queue size"
+    default: 1_000_000

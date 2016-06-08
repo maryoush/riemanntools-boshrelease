@@ -1,0 +1,6 @@
+
+check process riemann-rabbitmq
+  with pidfile /var/vcap/sys/run/riemann-tools/riemann-rabbitmq_pid
+  start program "/var/vcap/jobs/riemann-rabbitmq/bin/ctl-rabbitmq start"
+  stop program "/var/vcap/jobs/riemann-rabbitmq/bin/ctl-rabbitmq stop"
+  group vcap
