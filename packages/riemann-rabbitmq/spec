@@ -1,0 +1,8 @@
+---
+name: riemann-rabbitmq
+
+dependencies:
+  - riemann-tools
+
+files:
+   - riemann-tools/bin/riemann-rabbitmq
