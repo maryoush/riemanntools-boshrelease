@@ -111,6 +111,8 @@ jobs:
       inputs:
       - {name: boshrelease, path: riemanntools-boshrelease}
       - {name: version}
+      outputs:
+      - {name: final-release, path: release}
       run:
         path: ./riemanntools-boshrelease/ci/scripts/shipit.sh
         args: []
@@ -125,21 +127,21 @@ jobs:
         promotion_branch: master
   - put: git-riemanntools-boshrelease
     params:
-      repository: create-final-release/riemanntools-boshrelease
+      repository: release
       rebase: true
   - aggregate:
     - put: version
       params: {file: version/number}
     - put: final-release
       params:
-        from: create-final-release/riemanntools-boshrelease/releases/riemanntools/riemanntools-(.*).tgz
+        from: release/releases/riemanntools/riemanntools-(.*).tgz
         to: riemanntools-boshrelease/
     - put: github-final-release
       params:
-        name: create-final-release/riemanntools-boshrelease/release/name
-        tag: create-final-release/riemanntools-boshrelease/release/tag
-        body: create-final-release/riemanntools-boshrelease/release/notes.md
-        globs: [create-final-release/riemanntools-boshrelease/releases/riemanntools/riemanntools-*.tgz]
+        name: release/release/name
+        tag: release/release/tag
+        body: release/release/notes.md
+        globs: [release/releases/riemanntools/riemanntools-*.tgz]
 
 resources:
 - name: version
