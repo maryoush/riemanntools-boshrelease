@@ -1,0 +1,50 @@
+#!/bin/bash
+
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+RUN_DIR=/var/vcap/sys/run/riemann-tools
+LOG_DIR=/var/vcap/sys/log/riemann-tools
+JOB_DIR=/var/vcap/jobs/riemann-tools
+PIDFILE=${RUN_DIR}/riemann-rabbitmq_pid
+
+<%
+default_network = spec.networks.marshal_dump().detect { |_, network_spec| network_spec.default }.last
+job_ip = spec.networks.send(spec.networks.methods(false).first).ip
+require 'digest'
+JOB_IP_MD5 = Digest::MD5.hexdigest(job_ip)
+%>
+
+case $1 in
+
+  start)
+    mkdir -p $RUN_DIR $LOG_DIR
+    chown -R vcap:vcap $RUN_DIR $LOG_DIR
+
+    cd /var/vcap/packages/riemann-tools/riemann-tools
+
+    export PATH=/var/vcap/packages/ruby/bin:$PATH
+
+    bundle exec riemann-rabbitmq \
+      --host <%= properties.riemann.server %> \
+      --event-host <%= spec.index %>.<%= spec.job.name %>.<%= spec.deployment %>.<%= properties.riemann.suffix %> \
+      --monitor-user <%= properties.riemann.rabbitmq.user %> \
+      --monitor-pass <%= properties.riemann.rabbitmq.password %> \
+      --max-queue-size <%= properties.riemann.rabbitmq.maxqueuesize %> \
+      --node rabbit@<%= JOB_IP_MD5 %> \
+      1>> $LOG_DIR/riemann-rabbitmq.stdout.log \
+      2>> $LOG_DIR/riemann-rabbitmq.stderr.log &
+
+    echo $! > $PIDFILE
+    ;;
+
+  stop)
+
+    kill -9 `cat $PIDFILE`
+    rm -f $PIDFILE
+    ;;
+
+  *)
+    echo "Usage: ctl-rabbitmq {start|stop}" ;;
+
+esac
