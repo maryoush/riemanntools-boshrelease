@@ -1,27 +1,23 @@
 ---
 builds:
-  !binary "NmNlMmRmMTJmNjRkZjUxYmU4YjE5ZDA0NTkzZWI3YjMxN2NlN2NmYg==":
-    version: !binary |-
-      NmNlMmRmMTJmNjRkZjUxYmU4YjE5ZDA0NTkzZWI3YjMxN2NlN2NmYg==
-    sha1: !binary |-
-      YTY5MDdmNDA0ZmJkZTBkZTkzYjQ0ZDQ0MjUyMjYzZmNjN2QzNjUxZg==
+  6ce2df12f64df51be8b19d04593eb7b317ce7cfb:
+    version: 6ce2df12f64df51be8b19d04593eb7b317ce7cfb
+    sha1: a6907f404fbde0de93b44d44252263fcc7d3651f
     blobstore_id: 1c6f9610-33c5-4d99-858b-4137c3465f72
-  !binary "NjQwMGRiZWNjNzc4YzZhOGZmMzAzY2ZlMDI1NmZlNTFmZGVlMzExYg==":
-    version: !binary |-
-      NjQwMGRiZWNjNzc4YzZhOGZmMzAzY2ZlMDI1NmZlNTFmZGVlMzExYg==
-    sha1: !binary |-
-      YzllYmM5ZGViZDQ5MmVjOTMyNDE2NzY1MmVjMGQ3OTY3M2FmNmEwNw==
+  6400dbecc778c6a8ff303cfe0256fe51fdee311b:
+    version: 6400dbecc778c6a8ff303cfe0256fe51fdee311b
+    sha1: c9ebc9debd492ec9324167652ec0d79673af6a07
     blobstore_id: 00eb2e95-2d16-4d6d-8e4e-3d9e3a500a2d
-  !binary "ODJmM2JkMGEwZTk1ZjdhMWI1YWNjN2MzZjExMTk0N2M1YTY1MjQ1OQ==":
-    version: !binary |-
-      ODJmM2JkMGEwZTk1ZjdhMWI1YWNjN2MzZjExMTk0N2M1YTY1MjQ1OQ==
-    sha1: !binary |-
-      ZGRhZjIzZTMzMDQ4OWY1YTAzOTJiMWM0ZTI4MDZkZmQ3MjY1NjRlOA==
+  82f3bd0a0e95f7a1b5acc7c3f111947c5a652459:
+    version: 82f3bd0a0e95f7a1b5acc7c3f111947c5a652459
+    sha1: ddaf23e330489f5a0392b1c4e2806dfd726564e8
     blobstore_id: 95b38535-6d1a-4347-aceb-9a4395ad350d
-  !binary "ODdkYzE4MTNlZThhM2VjMWU3MjU4Y2EwM2Y5NjQ1MjYwMGZiYjc1Yw==":
-    version: !binary |-
-      ODdkYzE4MTNlZThhM2VjMWU3MjU4Y2EwM2Y5NjQ1MjYwMGZiYjc1Yw==
-    sha1: !binary |-
-      NzU0M2VkNjc5ZDQ1YTViMWI1YWFhMjk5YjliN2Q5OGYzNTEzN2YxMw==
+  87dc1813ee8a3ec1e7258ca03f96452600fbb75c:
+    version: 87dc1813ee8a3ec1e7258ca03f96452600fbb75c
+    sha1: 7543ed679d45a5b1b5aaa299b9b7d98f35137f13
     blobstore_id: 6c9b86e1-aa1a-48a7-b7f7-d4fc0e1830a0
+  a0cde6a9f603e38fe043dcc3df0b1dad9406ced8:
+    version: a0cde6a9f603e38fe043dcc3df0b1dad9406ced8
+    sha1: 3f01742e3ec42fec6e489bfcf1f6c028b97d5ff0
+    blobstore_id: 21fa5061-b8d7-496f-bb48-a12513279181
 format-version: '2'
