@@ -37,17 +37,17 @@ jobs:
     - task: create-release-and-deploy
       config:
         platform: linux
-        image: {{docker-hub-task-image}}
+        image: docker:///teamidefix/riemanntools-boshrelease-pipeline
         inputs:
         - {name: riemanntools-boshrelease}
         run:
           path: ./riemanntools-boshrelease/ci/scripts/create_release_and_deploy.sh
           args: []
         params:
-          bosh_target: {{bosh-lite-build-target}}
+          bosh_target: https://10.31.12.88:25555
           bosh_username: {{bosh-lite-build-username}}
           bosh_password: {{bosh-lite-build-password}}
-          bosh_deployment_name: {{bosh-lite-build-deployment-name}}
+          bosh_deployment_name: riemanntools-warden
 
 - name: rc
   public: true
@@ -107,7 +107,7 @@ jobs:
   - task: create-final-release
     config:
       platform: linux
-      image: {{docker-hub-task-image}}
+      image: docker:///teamidefix/riemanntools-boshrelease-pipeline
       inputs:
       - {name: boshrelease, path: riemanntools-boshrelease}
       - {name: version}
@@ -118,10 +118,10 @@ jobs:
         args: []
       params:
         release_name: "riemanntools BOSH Release"
-        bosh_target: {{bosh-lite-build-target}}
+        bosh_target: https://10.31.12.88:25555
         bosh_username: {{bosh-lite-build-username}}
         bosh_password: {{bosh-lite-build-password}}
-        bosh_deployment_name: {{bosh-lite-build-deployment-name}}
+        bosh_deployment_name: riemanntools-warden
         aws_access_key_id: {{boshrelease-aws-access-key-id}}
         aws_secret_access_key: {{boshrelease-aws-secret-access-key}}
         promotion_branch: master
@@ -149,7 +149,7 @@ resources:
   type: semver
   source:
     key: current-version
-    bucket: {{pipeline-aws-bucket}}
+    bucket: riemanntools-boshrelease-pipeline
     access_key_id: {{pipeline-aws-access-key-id}}
     secret_access_key: {{pipeline-aws-secret-access-key}}
     initial_version: 0.0.0
@@ -184,7 +184,7 @@ resources:
 - name: final-release
   type: s3
   source:
-    bucket: {{boshrelease-aws-bucket}}
+    bucket: blobs-yaas-idefix
     regexp: riemanntools-boshrelease/riemanntools-(.*).tgz
     access_key_id: {{boshrelease-aws-access-key-id}}
     secret_access_key: {{boshrelease-aws-secret-access-key}}
@@ -202,4 +202,4 @@ resources:
     email: {{docker-hub-email}}
     username: {{docker-hub-username}}
     password: {{docker-hub-password}}
-    repository: {{docker-create-hub-task-image}}
+    repository: teamidefix/riemanntools-boshrelease-pipeline
