@@ -14,6 +14,6 @@ properties:
   riemann.suffix:
     description: "Suffix for the riemann host"
     default: bosh
-  stats_url:
+  haproxy.stats_url:
     description: "Full url to haproxy stats (eg: https://user:password@host.com:9999/stats)"
     default: "http://idefix:X!f3dI@127.0.0.1:9000/stats"
