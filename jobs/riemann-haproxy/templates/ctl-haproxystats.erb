@@ -1,0 +1,40 @@
+#!/bin/bash
+
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+RUN_DIR=/var/vcap/sys/run/riemann-haproxy
+LOG_DIR=/var/vcap/sys/log/riemann-haproxy
+JOB_DIR=/var/vcap/jobs/riemann-haproxy
+PIDFILE=${RUN_DIR}/haproxystats_pid
+
+case $1 in
+
+  start)
+    mkdir -p $RUN_DIR $LOG_DIR
+    chown -R vcap:vcap $RUN_DIR $LOG_DIR
+
+    cd /var/vcap/packages/riemann-tools/riemann-tools
+
+    export PATH=/var/vcap/packages/ruby/bin:$PATH
+
+    bundle exec riemann-haproxy \
+        --host <%= properties.riemann.server %> \
+        --event-host <%= spec.index %>.<%= spec.job.name %>.<%= spec.deployment %>.<%= properties.riemann.suffix %> \
+        --stats_url <%= properties.haproxy.stats_url %> \
+        1>> $LOG_DIR/riemann-haproxy.stdout.log \
+        2>> $LOG_DIR/riemann-haproxy.stderr.log &
+
+    echo $! > $PIDFILE
+    ;;
+
+  stop)
+
+    kill -9 `cat $PIDFILE`
+    rm -f $PIDFILE
+    ;;
+
+  *)
+    echo "Usage: ctl-haproxystats {start|stop}" ;;
+
+esac
