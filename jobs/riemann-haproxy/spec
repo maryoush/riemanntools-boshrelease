@@ -6,7 +6,7 @@ packages:
   - riemann-tools
 
 templates:
-  ctl-diskstats.erb: bin/ctl-haproxystats
+  ctl-haproxystats.erb: bin/ctl-haproxystats
 
 properties:
   riemann.server:
