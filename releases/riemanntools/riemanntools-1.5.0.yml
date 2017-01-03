@@ -1,0 +1,99 @@
+---
+packages:
+- name: java_for_riemanntools
+  version: 64f09b3eac50dca8c6f48f57d85833f1c15f3d7d
+  fingerprint: 64f09b3eac50dca8c6f48f57d85833f1c15f3d7d
+  sha1: 59df049b5700a9c7792af8b17bc504d0e5b0db1f
+  dependencies: []
+- name: riemann-cassandra
+  version: 80a1464193da96648491f7d052b03b50fab80ec2
+  fingerprint: 80a1464193da96648491f7d052b03b50fab80ec2
+  sha1: e34520bf0c94c22650ff1e9cc4a8862b12c15d82
+  dependencies: []
+- name: riemann-mongodb
+  version: afe9bbfbff8a001343e8efd93c3de336ec305000
+  fingerprint: afe9bbfbff8a001343e8efd93c3de336ec305000
+  sha1: 7b5e136f901e12f5d6c043331173e9fc27871afd
+  dependencies:
+  - ruby
+- name: riemann-neo4j
+  version: cd48d1ced17a0df742f121031a9ddabb76d10f45
+  fingerprint: cd48d1ced17a0df742f121031a9ddabb76d10f45
+  sha1: be6407314e8e4d102202f1bced250582240846a7
+  dependencies: []
+- name: riemann-rabbitmq
+  version: 8c31975959666494f25651a2db2697339859542e
+  fingerprint: 8c31975959666494f25651a2db2697339859542e
+  sha1: a83abe1033466286b30d120ca9a299d687808667
+  dependencies:
+  - riemann-tools
+- name: riemann-redis
+  version: 0339db99ca93e64e934f116b2e2273d34c16f3ea
+  fingerprint: 0339db99ca93e64e934f116b2e2273d34c16f3ea
+  sha1: 679f5b31462b56484732d28fe936e679983d29d9
+  dependencies:
+  - ruby
+- name: riemann-tools
+  version: a0cde6a9f603e38fe043dcc3df0b1dad9406ced8
+  fingerprint: a0cde6a9f603e38fe043dcc3df0b1dad9406ced8
+  sha1: 3f01742e3ec42fec6e489bfcf1f6c028b97d5ff0
+  dependencies:
+  - ruby
+- name: ruby
+  version: 9b59d2f2700da81a98c38c73cd27b6ccf26f188c
+  fingerprint: 9b59d2f2700da81a98c38c73cd27b6ccf26f188c
+  sha1: bca003ec47c71d314b8c1f0bf94cf1ddb3fbd868
+  dependencies: []
+jobs:
+- name: riemann-cassandra
+  version: d750a28ed0273b4ea903996649a1650a35a00735
+  fingerprint: d750a28ed0273b4ea903996649a1650a35a00735
+  sha1: b9fc87efc3e1aa2b174cbaa4e26795b00969e193
+- name: riemann-disk
+  version: bd65bfacbe617593b74c62d476322007123f2138
+  fingerprint: bd65bfacbe617593b74c62d476322007123f2138
+  sha1: 6cd7e21abc3deafdd4b6dcd09bbf1f680d6dd6de
+- name: riemann-elasticsearch
+  version: 9f6b32b782089059b36d1dbb838a8de58d8d059d
+  fingerprint: 9f6b32b782089059b36d1dbb838a8de58d8d059d
+  sha1: 856101a15234b408d1cb737f13f93bbfd762a2c4
+- name: riemann-fd
+  version: 3a759550a7cbe4bc3a5cd805f89e872310d950e7
+  fingerprint: 3a759550a7cbe4bc3a5cd805f89e872310d950e7
+  sha1: b177ab910e38503b4af5f12936f0417b59defd8d
+- name: riemann-haproxy
+  version: 480c526c9c0ca8adfbd06bd73a914e6e329460a8
+  fingerprint: 480c526c9c0ca8adfbd06bd73a914e6e329460a8
+  sha1: 2729a7ee3a0d7a45df5667e59629ecee7a63d5a3
+- name: riemann-mongodb
+  version: 45472c28c0e8bbbc7a307b68c7faac2f6ae893af
+  fingerprint: 45472c28c0e8bbbc7a307b68c7faac2f6ae893af
+  sha1: 7a85931cf8a6c8de068379a30101cac438f8778e
+- name: riemann-neo4j
+  version: 4c951b58f356b94f11e683d6ba05022c3c2a3369
+  fingerprint: 4c951b58f356b94f11e683d6ba05022c3c2a3369
+  sha1: e17c44e639f515358506a492270139dd137ddd55
+- name: riemann-rabbitmq
+  version: df23c8e1db3e358cc787647b7efe6c0e6e3da0c7
+  fingerprint: df23c8e1db3e358cc787647b7efe6c0e6e3da0c7
+  sha1: 21bd2ca8d19b14aa3d6ad50ba71e2628044f0256
+- name: riemann-redis
+  version: f02024badfa2b8659a140684b2b9bd12cda38a87
+  fingerprint: f02024badfa2b8659a140684b2b9bd12cda38a87
+  sha1: 2ce88a3fe8d4a2ea2dae2424c731ba033c0e3bdb
+- name: riemann-tools
+  version: 036363e8d06512229898084173ec23525c3dbd9f
+  fingerprint: 036363e8d06512229898084173ec23525c3dbd9f
+  sha1: 88ae4e5b02e2fddde57abc8b8ee58a30ddf9af74
+- name: riemann-zookeeper
+  version: d8ec57b18d766dad07bb87097c175bdcbc8d1572
+  fingerprint: d8ec57b18d766dad07bb87097c175bdcbc8d1572
+  sha1: e21995391c89849274e3afa8ebb331420d9b9e5e
+license:
+  version: 90a2638cfdb97bd11662ee704edcee87c65dc174
+  fingerprint: 90a2638cfdb97bd11662ee704edcee87c65dc174
+  sha1: a7a50c9a53d6d40128c71679e8456192396e35ba
+commit_hash: 57a00ed1
+uncommitted_changes: true
+name: riemanntools
+version: 1.5.0
