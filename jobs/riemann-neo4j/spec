@@ -25,6 +25,9 @@ properties:
     description: "Team prefix to be used in report to riemann server"
   riemann.prefix.host:
     description: "Host prefix to be used in report to riemann server"
+  neo4j.server.host_shared_with_riemman:
+    description: "Flag indicating if neo4j is on the same host as riemman tools"
+    default: false
   neo4j.server.ip:
     description: "IP of the neo4j server."
   neo4j.jmx.port:
