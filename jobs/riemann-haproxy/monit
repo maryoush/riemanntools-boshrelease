@@ -1,0 +1,5 @@
+check process riemann-haproxy
+  with pidfile /var/vcap/sys/run/riemann-haproxy/haproxystats_pid
+  start program "/var/vcap/jobs/riemann-haproxy/bin/ctl-haproxystats start"
+  stop program "/var/vcap/jobs/riemann-haproxy/bin/ctl-haproxystats stop"
+  group vcap
