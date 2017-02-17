@@ -71,8 +71,10 @@ queries :
     #           service not set,
     #               => Riemann Event{:host "localhost-9999" :service "kafka:type=kafka.LogFlushStats" ...}
     #               => Graphite "localhost-9999.kafka:type=kafka.LogFlushStats.AvgFlushMs"
-
--   service : "<%= p('riemann.prefix.team') %>.<%= p("riemann.prefix.env") %>.<%= spec.deployment %>.<%= p('riemann.prefix.host') %>.<%= spec.index %>.neo4j.java.system"
+<%
+  service_prefix = p('riemann.prefix.team') + "." + spec.deployment + "." + p('riemann.prefix.host') + "." + spec.index.to_s
+%>
+-   service : "<%= service_prefix %>.neo4j.java.system"
     obj     : "java.lang:type=OperatingSystem"
     attr    :
     -   AvailableProcessors
@@ -80,7 +82,7 @@ queries :
     -   FreeSwapSpaceSize
     -   FreePhysicalMemorySize
 
--   service : "<%= p('riemann.prefix.team') %>.<%= p("riemann.prefix.env") %>.<%= spec.deployment %>.<%= p('riemann.prefix.host') %>.<%= spec.index %>.neo4j.java.threads"
+-   service : "<%= service_prefix %>.neo4j.java.threads"
     obj     : "java.lang:type=Threading"
     attr    :
     -   DaemonThreadCount
@@ -88,7 +90,7 @@ queries :
     -   ThreadCount
     -   CurrentThreadCpuTime
 
--   service : "<%= p('riemann.prefix.team') %>.<%= p("riemann.prefix.env") %>.<%= spec.deployment %>.<%= p('riemann.prefix.host') %>.<%= spec.index %>.neo4j.primitive"
+-   service : "<%= service_prefix %>.neo4j.primitive"
     obj     : "org.neo4j:instance=kernel#0,name=Primitive count"
     attr    :
     -   NumberOfNodeIdsInUse
@@ -96,7 +98,7 @@ queries :
     -   NumberOfRelationshipIdsInUse
     -   NumberOfRelationshipTypeIdsInUse
 
--   service : "<%= p('riemann.prefix.team') %>.<%= p("riemann.prefix.env") %>.<%= spec.deployment %>.<%= p('riemann.prefix.host') %>.<%= spec.index %>.neo4j.store"
+-   service : "<%= service_prefix %>.neo4j.store"
     obj     : "org.neo4j:instance=kernel#0,name=Store file sizes"
     attr    :
     -   ArrayStoreSize
@@ -107,7 +109,7 @@ queries :
     -   StringStoreSize
     -   TotalStoreSize
 
--   service : "<%= p('riemann.prefix.team') %>.<%= p("riemann.prefix.env") %>.<%= spec.deployment %>.<%= p('riemann.prefix.host') %>.<%= spec.index %>.neo4j.transactions"
+-   service : "<%= service_prefix %>.neo4j.transactions"
     obj     : "org.neo4j:instance=kernel#0,name=Transactions"
     attr    :
     -   LastCommittedTxId
