@@ -40,4 +40,6 @@ builds:
     version: 1.7.0
   b12bfa90-44a1-4ff5-8bca-b9264f91489c:
     version: 1.9.0
+  4dd8ff29-f51a-41d6-995a-805f3f7c0d40:
+    version: 1.11.0
 format-version: '2'
