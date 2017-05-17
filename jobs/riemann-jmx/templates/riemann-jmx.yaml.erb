@@ -50,8 +50,11 @@ riemann :
 
 jmx :
     host : <%= my_ip %>
+    <%
+      event_host = spec.index.to_s + "." + p('riemann.prefix.host') + "." + spec.deployment + "." + p('riemann.suffix')
+    %>
     # event_host optional attribute to be used in report to riemann riemann, otherwise host attribute will be used
-    event_host : <%= p("riemann.prefix.env") %>
+    event_host : <%= event_host %>
     <% if_p("riemann.jmx.port") do %>port : <%= p("riemann.jmx.port") %><% end %>
     # username & password are optional; they're used for authenticated JMX
     <% if_p("riemann.jmx.username") do %>username : <%= p("riemann.jmx.username") %><% end %>
@@ -72,11 +75,10 @@ queries :
     #               => Riemann Event{:host "localhost-9999" :service "kafka:type=kafka.LogFlushStats" ...}
     #               => Graphite "localhost-9999.kafka:type=kafka.LogFlushStats.AvgFlushMs"
 <%
-  service_prefix = p('riemann.prefix.team') + "." + spec.deployment + "." + p('riemann.prefix.host') + "." + spec.index.to_s
   jmx_config = p("riemann.jmx.config")
 %>
 <% jmx_config.each do |config| %>
--   service : "<%= service_prefix %>.<%= config["service_name"] %>"
+-   service : "<%= config["service_name"] %>"
     obj     : "<%= config["object"] %>"
     attr    : <% config["attributes"].each do |attribute| %>
     -   <%= attribute %><% end %>

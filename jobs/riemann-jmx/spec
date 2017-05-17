@@ -17,13 +17,10 @@ properties:
     description: "IP of the riemann server."
   riemann.port:
     description: "Port on which the riemann server is available."
+  riemann.suffix:
+    description: "Riemann host suffix"  
   riemann.interval:
     description: "Riemann neo4j refresh interval."
-  riemann.prefix.env:
-    description: "Environment prefix to be used in report to riemann server"
-    default: "bosh"
-  riemann.prefix.team:
-    description: "Team prefix to be used in report to riemann server"
   riemann.prefix.host:
     description: "Host prefix to be used in report to riemann server"
   riemann.jmx.port:
