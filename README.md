@@ -1,6 +1,15 @@
 BOSH release to run riemanntools
 =======================
 
+Important
+---------
+
+Run after checkout:  
+```
+git submodule update --init --recursive
+```
+
+
 Background
 ----------
 
